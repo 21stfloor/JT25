@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<head>
+<center> <img src="CompanyName.jpg" width="100%" height="40%" div class="logo"> </center></img>
+<style><!--code start here-->
+@import url(https://fonts.googleapis.com/css?family=Oswald:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+
+/* Override UGG site */
+#main {width: 100%; padding:0;}
+.content-asset p {margin:0 auto;}
+.breadcrumb {display:none;}
+
+/* Helpers */
+/**************************/
+.margin-top-10 {padding-top:10px;}
+.margin-bot-10 {padding-bottom:10px;}
+
+/* Typography */
+/**************************/
+#parallax-world-of-ugg h1 {font-family:'Oswald', sans-serif; font-size:24px; font-weight:400; text-transform: uppercase; color:black; padding:0; margin:0;}
+#parallax-world-of-ugg h2 {font-family:'Oswald', sans-serif; font-size:70px; letter-spacing:10px; text-align:center; color:white; font-weight:400; text-transform:uppercase; z-index:10; opacity:.9;}
+#parallax-world-of-ugg h3 {font-family:'Oswald', sans-serif; font-size:14px; line-height:0; font-weight:400; letter-spacing:8px; text-transform: uppercase; color:black;}
+#parallax-world-of-ugg p {font-family:'Source Sans Pro', sans-serif; font-weight:400; font-size:14px; line-height:24px;}
+.first-character {font-weight:400; float: left; font-size: 84px; line-height: 64px; padding-top: 4px; padding-right: 8px; padding-left: 3px; font-family: 'Source Sans Pro', sans-serif;}
+
+.sc {color: #3b8595;}
+.ny {color: #3d3c3a;}
+.atw {color: #c48660;}
+
+/* Section - Title */
+/**************************/
+#parallax-world-of-ugg .title {background: white; padding: 60px; margin:0 auto; text-align:center;}
+#parallax-world-of-ugg .title h1 {font-size:35px; letter-spacing:8px;}
+
+/* Section - Block */
+/**************************/
+#parallax-world-of-ugg .block {background: white; padding: 60px; width:820px; margin:0 auto; text-align:justify;}
+#parallax-world-of-ugg .block-gray {background: #f2f2f2;padding: 60px;}
+#parallax-world-of-ugg .section-overlay-mask {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 0.70;}
+
+/* Section - Parallax */
+/**************************/
+#parallax-world-of-ugg .parallax-one {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://w.wallhaven.cc/full/kw/wallhaven-kwdd9d.png); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
+#parallax-world-of-ugg .parallax-two {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://images.unsplash.com/photo-1432163230927-a32e4fd5a326?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+#parallax-world-of-ugg .parallax-three {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://w.wallhaven.cc/full/k9/wallhaven-k97erd.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+
+/* Extras */
+/**************************/
+#parallax-world-of-ugg .line-break {border-bottom:1px solid black; width: 150px; margin:0 auto;}
+
+/* Media Queries */
+/**************************/
+@media screen and (max-width: 959px) and (min-width: 768px) {
+  #parallax-world-of-ugg .block {padding: 40px; width:620px;}
+}
+@media screen and (max-width: 767px) {
+  #parallax-world-of-ugg .block {padding: 30px; width:420px;}
+  #parallax-world-of-ugg h2 {font-size:30px;}
+  #parallax-world-of-ugg .block {padding: 30px;}
+  #parallax-world-of-ugg .parallax-one, #parallax-world-of-ugg .parallax-two, #parallax-world-of-ugg .parallax-three {padding-top:100px; padding-bottom:100px;}
+}
+@media screen and (max-width: 479px) {
+  #parallax-world-of-ugg .block {padding: 30px 15px; width:290px;}
+}
+<!--Code start here nav-->
+.dropdownmenu ul, .dropdownmenu li {
+	margin: 0;
+	padding: 0;
+}
+.dropdownmenu ul {
+	background: gray;
+	list-style: none;
+	width: 100%;
+}
+.dropdownmenu li {
+	float: left;
+	position: relative;
+	width:auto;
+}
+.dropdownmenu a {
+	background: #30A6E6;
+	color: #FFFFFF;
+	display: block;
+	font: bold 12px/20px sans-serif;
+	padding: 10px 25px;
+	text-align: center;
+	text-decoration: none;
+	-webkit-transition: all .25s ease;
+	-moz-transition: all .25s ease;
+	-ms-transition: all .25s ease;
+	-o-transition: all .25s ease;
+	transition: all .25s ease;
+}
+.dropdownmenu li:hover a {
+	background: #000000;
+}
+#submenu {
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	top: 35px;
+	visibility: hidden;
+	z-index: 1;
+}
+li:hover ul#submenu {
+	opacity: 1;
+	top: 40px;	/* adjust this as per top nav padding top & bottom comes */
+	visibility: visible;
+}
+#submenu li {
+	float: none;
+	width: 100%;
+}
+#submenu a:hover {
+	background: #DF4B05;
+}
+#submenu a {
+	background-color:#000000;
+}
+
+<!--code end here nav-->
+</style><!--code end here-->
+<title>Architect LandingPage</title>
+<script><!--code start here here-->
+
+</script><!--code end here-->
+</head>
+<body>
+
+<!--Code start here Nav1-->
+<nav class="dropdownmenu">
+  <ul>
+    <li><a style="font-size:2vw" href="Main.html">Home</a></li>
+    <li><a style="font-size:2vw" href="PastProjects.html">About Me</a></li>
+    <li><a style="font-size:2vw" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfyNSatpshOEoCTmX16cZmfTqI3ruMK9FcJexK-f5weIxJ7eg/viewform?embedded=true target=_blank">Contact Us</a></li>
+    <li><a style="font-size:2vw" href="Quotation.html">Quotation</a></li>
+  </ul>
+</nav>
+<!--Code end Here nav1-->
+
+<!--Code start here Nav2-->
+<nav class="dropdownmenu">
+  <ul>
+    <li><a style="font-size:2vw" target="_blank" href="https://www.facebook.com/profile.php?id=61551045083008">Facebook</a></li>
+  </ul>
+</nav>
+<!--Code end Here nav2-->
+
+
+<!--code here-->
+<div id="parallax-world-of-ugg">
+  
+<section>
+  <div class="title">
+    <h3 style="font-size:2vw" >Create Your Dream Home with</h3>
+    <h1 style="font-size:3vw" >JLT25 Architechtural Design Services</h1>
+  </div>
+</section>
+
+<section>
+    <div class="parallax-one">
+      <h2>Antipolo</h2>
+    </div>
+</section>
+
+<section>
+  <div class="block">
+    <p style="font-size:1vw" ><span class="first-character sc">B</span>reaking into the Architechtural Business Lanscape is no easy task. But by the early 2020's, JLT25 Architechtural Design Services began. The evolution of JLT25 Architectural Design Services from a brand that made simple buildings, houses, shacks and outhouses for an active, outdoor lifestyle to a brand that was now being touted as a symbol of a niche, casual and luxurious lifestyle was swift.</p>
+    <p class="line-break margin-top-10"></p>
+    <p class="margin-top-10" style="font-size:1vw" >You may think that the company is still to young to be of any renown since the company began around 2020 but it actually was in the Architechtural Business Lanscape before JLT25 Architechtural Designs it wsa under another name that did the same projects, so you can be assured that the company itself may be new but its employees and its owner was within the Business Lanscape way before the foundation of this one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="parallax-two">
+    <h2>Samson</h2>
+  </div>
+</section>
+
+<section>
+  <div class="block">
+    <p style="font-size:1vw" ><span class="first-character ny">I</span>n 2015 JLT25 Architechtural Designs created a Building for Condominium company that was around 25 storeys hight,So that they can Fully Utilize the Business Process that they needed to implement so that they can be competitive to the market that is the growing demand for High End Homes , The movement helped the company so that they can take off in innovating and providing services to Condominium Landscape.</p>
+    <p class="line-break margin-top-10"></p>
+    <p class="margin-top-10" style="font-size:1vw">Using this as a launching point for thier company they were able to attract other clients thorugh thie sheer grandeur of thier work, since companys talk to one another those that can and cannot get separated and so that the companys that do contract work are able to certainty that the company that they contract are able to do thier job much like a recognition within the commuity within the business</p>
+  </div>
+</section>
+
+<section>
+  <div class="parallax-three">
+    <h2>KingsPoint</h2>
+  </div>
+</section>
+
+<section>
+  <div class="block">
+    <p style="font-size:1vw" ><span class="first-character atw">W</span>hen the Architechtural Design community notices your brand, the world soon follows. The widespread love for JLT25 extended to KingsPoints in the around 2020 along with the stylish casual movement and demand for premium Architectural Designs. JLT25 Designs and Construction were now seen walking the streets of KingsPoint, Antipolo and Samson. To meet the rising demand, They hired more workers to complete projects simultaneously</p>
+    <p class="line-break margin-top-10"></p>
+    <p class="margin-top-10" style="font-size:1vw" >The company themeselves are now able to create and finish multiple projects simultaneously through the coordination and the creation of thier owner Joel L. Tatad, through this they were able to finish a plethora of projects given through them. And if you were able to stic around and read through this company introduction we hope to be of service to you and we ensure to create the building that best fits your requirments all you need to do is to send us a message trhough one of our mailing systems which is the contact us tab in the upper menu of the wbsite or thorugh facebook messaging of our company page/p>
+  </div>
+</section>
+  
+</div>
+
+<!--code end here-->
+
+</body></div>
+</html>
