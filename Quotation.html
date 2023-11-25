@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 <img src="CompanyName.jpg" width="100%" height="40%" div class="logo"></img>  
+<link rel="stylesheet" type="text/css" href="quotation.css">
 <title>Quotation Estimations</title>
 <style>
 
@@ -95,77 +96,10 @@ li:hover ul#submenu {
 	background-color:#000000;
 }
 
+
 </style>
 
 </head>
-<script>
-	function passda(idx,idy,idz){
-		 var XadimensionID = idx;
-		 var YadimensionID = idy;
-		 var ZadimensionID = idz;
-
-		 sessionStorage.setItem("XadimensionsIS",XadimensionID);
-		 sessionStorage.setItem("YadimensionsIS",YadimensionID);
-		 console.log(XadimensionID);
-	}
-
-	function HideShame(idx,idy,idz) {
-  var x = document.getElementById("HideMyShame");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-
-  
-
-
-  	var XadimensionID = idx;
-	var YadimensionID = idy;
-	var ZadimensionID = idz;
-
-	var cubicmeter =  XadimensionID * YadimensionID * ZadimensionID;
-
-	var costrow1 = cubicmeter * 22000;
-
-	var resultrow1 = costrow1
-
-	document.getElementById("CostRow1").innerHTML = resultrow1;
-	document.getElementById("X-Dimension").innerHTML = XadimensionID;
-	document.getElementById("Y-Dimension").innerHTML = YadimensionID;
-	document.getElementById("Z-Dimension").innerHTML = ZadimensionID;
-	document.getElementById("Cubic-Meter").innerHTML = cubicmeter;
-
-
-	sessionStorage.setItem("XadimensionsIS",XadimensionID);
-	sessionStorage.setItem("YadimensionsIS",YadimensionID);
-	console.log(XadimensionID);
-	console.log(YadimensionID);
-	sessionStorage.clear();
-	HideBeforeSee();
-}
-
-function HideBeforeSee(){
-	var x = document.getElementById("Reciept");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-
-
-  var x = document.getElementById("breakdowning");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-
-}
-
-</script>
-<body onload="HideBeforeSee()">
-
 <!--Code start here Nav1-->
 <nav class="dropdownmenu">
   <ul>
@@ -213,205 +147,109 @@ function HideBeforeSee(){
     
   </div>
 
-  <!--Real-Time-Quotation-Start-->
-  <div>
-	<label for="length">Length (m):</label>
-	<input type="number" id="length" step="0.01">
-</div>
+<!--Real-Time-Quotation-Start-->
+<form id="quotationForm">
+  <div class="steps">
+    <div id="step1" class="form-step">
+        <label for="length"> Length (m):</label>
+        <input type="number" id="length" step="0.01" required>
+        <button type="button" onclick="nextStep()">Next</button>
+    </div>
 
-<div>
-	<label for="width">Width (m):</label>
-	<input type="number" id="width" step="0.01">
-</div>
+    <div id="step2" class="form-step" style="display: none;">
+        <label for="width">Width (m):</label>
+        <input type="number" id="width" step="0.01" required>
+        <button type="button" onclick="prevStep()">Previous</button>
+        <button type="button" onclick="nextStep()">Next</button>
+    </div>
 
-<div>
-	<label for="pricePerSqm">Price per sqm (PHP):</label>
-	<input type="number" id="pricePerSqm" step="0.01">
-</div>
+    <div id="step3" class="form-step" style="display: none;">
+        <label for="pricePerSqm">Price per sqm (PHP):</label>
+        <input type="number" id="pricePerSqm" step="0.01" required>
+        <button type="button" onclick="prevStep()">Previous</button>
+        <button type="button" onclick="calculateQuotation()">Calculate</button>
+    </div>
+  </div>
+</form>
 
-<div>
-	<p>Total sqm: <span id="totalSqm">0.00</span></p>
-	<p>Quotation: ₱<span id="quotation">0.00</span></p>
+<div id="quotationResults" style="display: active;">
+  <p>Total sqm: <span id="totalSqm">0.00</span></p>
+  <p>Quotation: ₱<span id="quotation">0.00</span></p>
+  <button type="button" onclick="restartForm()" id="doneButton">Done</button>
 </div>
 
 <script>
-	const lengthInput = document.getElementById("length");
-	const widthInput = document.getElementById("width");
-	const pricePerSqmInput = document.getElementById("pricePerSqm");
-	const totalSqmSpan = document.getElementById("totalSqm");
-	const quotationSpan = document.getElementById("quotation");
+  const steps = ["step1", "step2", "step3"];
+  let currentStep = 0;
 
-	// Function to calculate the total sqm and quotation in real-time
-	function calculateQuotation() {
-		const length = parseFloat(lengthInput.value);
-		const width = parseFloat(widthInput.value);
-		const pricePerSqm = parseFloat(pricePerSqmInput.value);
+  function showStep(stepIndex) {
+      steps.forEach(step => {
+          document.getElementById(step).style.display = "none";
+      });
+      document.getElementById(steps[stepIndex]).style.display = "block";
+      currentStep = stepIndex;
+  }
 
-		if (!isNaN(length) && !isNaN(width) && !isNaN(pricePerSqm)) {
-			const sqm = length * width;
-			const quotation = sqm * pricePerSqm;
+  function nextStep() {
+      if (validateInputs()) {
+          showStep(currentStep + 1);
+      }
+  }
 
-			totalSqmSpan.textContent = sqm.toFixed(2);
-			quotationSpan.textContent = quotation.toFixed(2);
-		}
-	}
+  function prevStep() {
+      showStep(currentStep - 1);
+  }
 
-	// Add event listeners to the input fields for real-time calculation
-	lengthInput.addEventListener("input", calculateQuotation);
-	widthInput.addEventListener("input", calculateQuotation);
-	pricePerSqmInput.addEventListener("input", calculateQuotation);
+  function validateInputs() {
+      const inputs = document.getElementById(steps[currentStep]).querySelectorAll('input[required]');
+      for (const input of inputs) {
+          if (!input.checkValidity()) {
+              alert("Please fill in all required fields.");
+              return false;
+          }
+      }
+      return true;
+  }
 
-	// Initial calculation
-	calculateQuotation();
+  const lengthInput = document.getElementById("length");
+  const widthInput = document.getElementById("width");
+  const pricePerSqmInput = document.getElementById("pricePerSqm");
+  const totalSqmSpan = document.getElementById("totalSqm");
+  const quotationSpan = document.getElementById("quotation");
+  const quotationResults = document.getElementById("quotationResults");
+  const doneButton = document.getElementById("doneButton");
+
+  // Function to calculate the total sqm and quotation in real-time
+  function calculateQuotation() {
+      const length = parseFloat(lengthInput.value);
+      const width = parseFloat(widthInput.value);
+      const pricePerSqm = parseFloat(pricePerSqmInput.value);
+
+      if (!isNaN(length) && !isNaN(width) && !isNaN(pricePerSqm)) {
+          const sqm = length * width;
+          const quotation = sqm * pricePerSqm;
+
+          totalSqmSpan.textContent = sqm.toFixed(2);
+          quotationSpan.textContent = quotation.toFixed(2);	
+
+          // Move to the next step after calculation
+      }
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+  
+  restartForm();
+});
+
+function restartForm() {  
+  document.getElementById("doneButton").addEventListener("click", function() {
+    totalSqmSpan.textContent = "0.00";
+    quotationSpan.textContent = "0.00";
+    document.getElementById("length").value = "";
+    document.getElementById("width").value = "";
+    document.getElementById("pricePerSqm").value = "";
+    showStep(0);
+  });
+}
 </script>
 <!--Real-Time-Quotation-End-->
-
-<div class="column" style="background-color:#ADD8E6;">
-<div class="row">
-        <br>
-	<form method ="get" action = "/QoutationResults.html">
-	<table>
-		<tr>
-			<td>X Dimension in Meters</td>
-			<td><input type ="text" name = "Xdimension" id = "XadimensionID" required></td>
-		</tr>
-		<tr>
-			<td>Y Dimension in Meters</td>
-			<td><input type ="text" name = "Ydimension" id = "YadimensionID" required></td>
-		</tr>
-		<tr>
-			<td>Z Dimension in Meters</td>
-			<td><input type ="text" name = "Zdimension" id = "ZadimensionID" required></td>
-		</tr>
-		<td></td>
-	</table>
-	</form>
-        <!--end of data sent to next form-->
-		
-
-		<!--First need to get the dimensions for sqm computations-->
-        
-      </div>
-      <div class="column" style="background-color:#ADD8E6;">
-        <br>
-        
-        <label for ="ZDimension">Z Dimensions:</label><br>
-	<input id = "ZadimensionID2" type ="text">
-        
-      </div>
-	
-</div> <!--END OF COLLUMS FOR COLLECTION -->
-<button type = "button" onclick="HideShame(document.getElementById('XadimensionID').value,document.getElementById('YadimensionID').value,document.getElementById('ZadimensionID').value)">Process Selection</button>
-<center>
-	<p style="font-size:1vw">All Right Reserved 2023</p></center>
-</center>
-</div>
-
-</div><!--End of Hiding Shame-->
-
-
-
-<div id="Reciept">
-<!--Start of Data Display-->
-<br><br><br><br>
-<div class="row">
-    <div class="column2" style="background-color:#1ca5c7;"><!--first row which is west-->
-<img src="logoTemplate.jpg" width="15%" height="15%" div class="logo"></img>  
-      <br><br>
-	  <table> <!--Table the collums so that it looks nice-->
-		<tr>
-			<td>Items Picked</td><br>
-			<td><p id = "itemRow1"></p></td>
-		</tr>
-		<tr>
-			<td>Chosen Laborer</td>
-			<td><p id = "itemRow2"></td>
-		</tr>
-		<tr>
-			<td>Expected Time</td><br>
-			<td><p id = "itemRow3"></td>
-		</tr>
-		<td></td>
-	</table>
-      
-    </div><!--end of first row which is west-->
-    <div class="column2" style="background-color:#cc6f18;"><!--second row which is east-->
-        <br><h3>JLT25 Architechtural Design Services</h3>
-        <table> <!--Table the collums so that it looks nice-->
-			<tr>
-				<td>Cost for total Cubic meter</td><br>
-			</tr>
-			<tr>
-				<td><p>₱</p></td>
-				<td><p id = "CostRow1"></p></td>
-				<td><p> Pesos</p></td>
-			</tr><!--End For Total Cost of Construction-->
-			<tr>
-				<td>Labor Cost</td><br>
-			</tr>
-			<tr>
-				<td><p> ₱ </p></td>
-				<td><p id = "CostRow2"></p></td>
-				<td><p> Pesos</p></td>
-			</tr><!--End For Total Cost of Laborer-->
-			<tr>
-				<td>Time Taken For Each Item</td><br>
-			</tr>
-			<tr>
-				<td><p> ₱ </p></td>
-				<td><p id = "CostRow3"></p></td>
-				<td><p> Pesos</p></td>
-			</tr><!--End For Total Cost of Items-->
-			<td></td>
-		</table>
-      </div><!--end of second row which is east-->
-      
-    
-  </div>
-</div><!--End of Data Display-->
-
-
-<div id="breakdowning"><!--start of Data breakdown hide-->
-<div class="column3" style="background-color:#3ccc18;">
-<!--start of Breakdown-->
-<br><br>
-<h2>BreakDown of Cost</h2>
-<table> <!--Table the collums so that it looks nice-->
-	<tr>
-		<td></td>
-	</tr>
-	<tr>
-		<td><p>X Dimension Which is: </p><p id = "X-Dimension"></p><p> Multiplied by Y-Dimension: </p><p id = "Y-Dimension"></p><p> and Multiplied by Z-Dimension: </p><p id = "Z-Dimension"></p><br></td>
-	</tr><!--End For Total Cost of Construction-->
-	<tr>
-		<td><p>We Get the Cubic Meter: </p><p id = "Cubic-Meter"></p><p> Which is then Multiplied again from the type of finishing selected by the radio button: </p><!--Put Radio Button Value here--></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr><!--End For Total Cost of Laborer-->
-	<tr>
-		<td></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr><!--End For Total Cost of Items-->
-	<td></td>
-</table>
-
-
-
-
-<!--end of Breakdown-->
-
-</div><!--end of Data breakdown hide-->
-</div><!--end of Collum3-->
-
-
-
-
-
 </html>
