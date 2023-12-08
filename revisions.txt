@@ -1,0 +1,28 @@
+Sir ang need po ay 
+
+
+[Done]Migration of website to Firebase
+[Done]Adding ng logo ng company to icon of webpages and navigation bar
+[Done]Email of architect to be sent the receicpt jltarchitechturaldesignservice@gmail.com
+[Done]Conditional for if total pricing cost if above 10 milyon that the company is unable to do the project
+
+
+Account system na nag verify existing yung account and tama ang format na nastore  sa php ng normalization per client account 
+And data to be taken for creating account that is stored in php is
+Fullname,birthday,location,email,number
+
+Add 
+Optional Materials than can be used in construction
+
+For example a dropbox that denotes they are want to use red wood for floring or use polished tiled for floring
+
+
+The prices of the materials are stored in database so that it can be freely manipulated
+
+Application in unity mobile kagaya ng sims kung saan pwede mag design ng layout ng building si user na pwede send sa architect yung layout
+
+By back end account ie administrator account
+
+If user log in using existing account it has an OTP sent to either email or number of client
+
+Back end which is yung php at yung account system for website 

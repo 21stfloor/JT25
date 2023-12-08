@@ -439,13 +439,14 @@ input:valid {
 
     <!--code end here-->
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
-      integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
       integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
+      integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js" integrity="sha512-oVbWSv2O4y1UzvExJMHaHcaib4wsBMS5tEP3/YkMP6GmkwRJAa79Jwsv+Y/w7w2Vb/98/Xhvck10LyJweB8Jsw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -460,6 +461,11 @@ input:valid {
 
               document.getElementById('form').addEventListener('submit', function(event) {
                   event.preventDefault();
+
+                  if(quotationTotal > 10000000){
+                    bootbox.alert("Sorry, but we can't handle projects above 10 million");
+                    return;
+                  }
 
                   html2canvas(document.querySelector("#summary-table")).then(canvas => {
                       var base64 = canvas.toDataURL();
@@ -488,12 +494,12 @@ input:valid {
                           },
                           success: function(response) {
                               console.log(response);
-                              alert('Email sent successfully!');
+                              bootbox.alert('Email sent successfully!');
                               $('.save-quote').removeAttr('disabled');
                           },
                           error: function(xhr, status, error) {
                               console.error(error);
-                              alert('Failed to send email.');
+                              bootbox.alert('Failed to send email.');
                               $('.save-quote').removeAttr('disabled');
                           }
                       });
@@ -807,7 +813,6 @@ input:valid {
         
         
         $('#quotationTotalSummary').text(`Quotation: ${formatCurrency(quotationTotal)}`);
-
       }
 
 
@@ -866,7 +871,7 @@ input:valid {
         var restRoomLength = parseFloat($(pageElem).find('.restRoomLength').val());
         var restRoomSqm = restRoomWidth * restRoomLength;
         if(restRoomSqm > totalSqm){
-          alert('Invalid Restroom sqm!');
+          bootbox.alert('Invalid Restroom sqm!');
           return false;
         }
       }
@@ -897,7 +902,7 @@ input:valid {
 
     $('#form').on('click', '.next-button', function(){
       if (!$('#form').get(0).checkValidity()) {
-        alert('Please fill up the form correctly!');
+        bootbox.alert('Please fill up the form correctly!');
         return;
       }
 
@@ -1277,7 +1282,11 @@ input:valid {
           totalSqm = sqm;
           quotationSpan.textContent = formatCurrency(quotation);	
           basePrice = quotation;
-}
+        if(quotation > 10000000){
+          bootbox.alert("Sorry, but we can't handle projects above 10 million");
+          return;
+        }
+    }
 	}
 
 	// Add event listeners to the input fields for real-time calculation
