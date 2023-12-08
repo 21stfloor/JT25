@@ -143,7 +143,8 @@ input:valid {
             <h3>Plumbing(Construction of septic vault, applicable in all Groups)</h3>
             <div class="mb-3 form-floating">
               <input class="form-control septicVaultSize" type="number"
-                id="septicVaultSize" min="0.1" step="0.1" data-required>
+                id="septicVaultSize" min="0.1" step="0.1" data-required
+                data-fee="24">
               <label class="form-label" for="septicVaultSize">Septic Vault(cu.
                 m.)</label>
             </div>
@@ -159,33 +160,42 @@ input:valid {
             class="col-md-4 col-12 offset-md-4 bg-primary-subtle rounded p-3">
             <h3>Electrical(Electrical Fee)</h3>
             <div class="mb-3 form-floating">
-              <input class="form-control switchesCount" type="number"
-                id="switchesCount" min="1" step="1" data-required>
-              <label class="form-label" for="switchesCount">No. switches</label>
+              <input class="form-control switchesCount hasSwitches"
+                type="number"
+                id="switchesCount" min="1" step="1" data-required data-fee="1.5"
+                data-min="0">
+              <label class="form-label" for="switchesCount">Switches</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control lightingsCount" type="number"
-                id="lightingsCount" min="1" step="1" data-required>
-              <label class="form-label" for="lightingsCount">No. lightings</label>
+              <input class="form-control lightingsCount hasSwitches"
+                type="number"
+                id="lightingsCount" min="1" step="1" data-required
+                data-fee="1.5" data-min="0">
+              <label class="form-label" for="lightingsCount">Lightings</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control outletCount" type="number"
-                id="outletCount" min="1" step="1" data-required>
-              <label class="form-label" for="outletCount">No. Convinience Outlet</label>
+              <input class="form-control outletCount hasSwitches" type="number"
+                id="outletCount" min="1" step="1" data-required data-fee="1.5"
+                data-min="0">
+              <label class="form-label" for="outletCount">Convinience Outlet</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control masterSwitchCount" type="number"
-                id="outletCount" min="1" step="1" data-required>
-              <label class="form-label" for="outletCount">No. Master Switch</label>
+              <input class="form-control masterSwitchCount hasSwitches"
+                type="number"
+                id="masterSwitchCount" min="1" step="1" data-required
+                data-fee="24" data-min="0">
+              <label class="form-label" for="masterSwitchCount">Master Switch</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control branchCircuit" type="number"
-                id="branchCircuit" min="1" step="1" data-required>
-              <label class="form-label" for="branchCircuit">No. Branch Circuit</label>
+              <input class="form-control branchCircuit hasSwitches"
+                type="number"
+                id="branchCircuit" min="1" step="1" data-required data-fee="3"
+                data-min="0">
+              <label class="form-label" for="branchCircuit">Branch Circuit</label>
             </div>
             <p>Installation Fee</p>
             <div class="form-check">
@@ -218,39 +228,41 @@ input:valid {
             class="col-md-4 col-12 offset-md-4 bg-primary-subtle rounded p-3">
             <h3>Electrical(Motors and Controlling Apparatus, per unit)</h3>
             <div class="mb-3 form-floating">
-              <input class="form-control motorPoint2" type="number"
-                id="motorPoint2" min="1" step="1" data-fee="5">
+              <input class="form-control motorPoint2 hasMotors" type="number"
+                id="motorPoint2" min="1" step="1" data-fee="5" data-min="0">
               <label class="form-label" for="motorPoint2">Up to .2KW</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control motorPoint2To1" type="number"
-                id="motorPoint2To1" min="1" step="1" data-fee="10">
+              <input class="form-control motorPoint2To1 hasMotors" type="number"
+                id="motorPoint2To1" min="1" step="1" data-fee="10" data-min="0">
               <label class="form-label" for="motorPoint2To1">Above .2KW up to
                 1KW</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control motor1to5" type="number" id="motor1to5"
-                min="1" step="1" data-fee="20">
+              <input class="form-control motor1to5 hasMotors" type="number"
+                id="motor1to5"
+                min="1" step="1" data-fee="20" data-min="0">
               <label class="form-label" for="motor1to5">Above 1KW up to 5KW</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control motor5to10" type="number"
-                id="motor5to10" min="1" step="1" data-fee="30">
+              <input class="form-control motor5to10 hasMotors" type="number"
+                id="motor5to10" min="1" step="1" data-fee="30" data-min="0">
               <label class="form-label" for="motor5to10">Above 5KW up to 10KW</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control motor10to20" type="number"
-                id="motor10to20" min="1" step="1" data-fee="40">
+              <input class="form-control motor10to20 hasMotors" type="number"
+                id="motor10to20" min="1" step="1" data-fee="40" data-min="0">
               <label class="form-label" for="motor10to20">Above 10KW up to 20KW</label>
             </div>
 
             <div class="mb-3 form-floating">
               <input class="form-control motor20above" type="number"
-                id="motor20above" min="1" step="1" data-fee="2" data-start="20">
+                id="motor20above" min="1" step="1" data-fee="2" data-start="20"
+                data-min="0">
               <label class="form-label" for="motor20above">Every KW or fraction
                 thereof above 20KW</label>
             </div>
@@ -266,20 +278,23 @@ input:valid {
             class="col-md-4 col-12 offset-md-4 bg-primary-subtle rounded p-3">
             <h3>Electrical(Generators/UPS Capacity(AC or DC), per unit)</h3>
             <div class="mb-3 form-floating">
-              <input class="form-control generators1" type="number"
-                id="generators1" min="1" step="1" data-fee="40">
+              <input class="form-control generators1 hasGenerator" type="number"
+                id="generators1" min="1" step="1" data-fee="40" data-min="0">
               <label class="form-label" for="generators1">1KW or less</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control generators1to5" type="number"
-                id="generators1to5" min="1" step="1" data-fee="150">
+              <input class="form-control generators1to5 hasGenerator"
+                type="number"
+                id="generators1to5" min="1" step="1" data-fee="150" data-min="0">
               <label class="form-label" for="generators1to5">above 1KW up to 5KW</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control generators5to10" type="number"
-                id="generators5to10" min="1" step="1" data-fee="800">
+              <input class="form-control generators5to10 hasGenerator"
+                type="number"
+                id="generators5to10" min="1" step="1" data-fee="800"
+                data-min="0">
               <label class="form-label" for="generators5to10">above 5KW up to
                 10KW</label>
             </div>
@@ -287,7 +302,7 @@ input:valid {
             <div class="mb-3 form-floating">
               <input class="form-control generators20above" type="number"
                 id="generators20above" min="1" step="1" data-fee="2300"
-                data-start="20">
+                data-start="20" data-min="0">
               <label class="form-label" for="generators20above">Every KW or
                 fraction thereof in excess of 20KW</label>
             </div>
@@ -303,15 +318,17 @@ input:valid {
             class="col-md-4 col-12 offset-md-4 bg-primary-subtle rounded p-3">
             <h3>Electrical(Pole/Attachment Location Plan Permit)</h3>
             <div class="mb-3 form-floating">
-              <input class="form-control poleLocation" type="number"
-                id="poleLocation" min="1" step="1" data-fee="30">
+              <input class="form-control poleLocation hasPole" type="number"
+                id="poleLocation" min="1" step="1" data-fee="30" data-min="0">
               <label class="form-label" for="poleLocation">Pole Location Plan
                 Permit</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control attachmentLocation" type="number"
-                id="attachmentLocation" min="1" step="1" data-fee="30">
+              <input class="form-control attachmentLocation hasPole"
+                type="number"
+                id="attachmentLocation" min="1" step="1" data-fee="30"
+                data-min="0">
               <label class="form-label" for="attachmentLocation">Attachment
                 Location Plan Permit</label>
             </div>
@@ -328,9 +345,10 @@ input:valid {
             <h3>Electrical(Aggregate Connected Load)</h3>
             <div class="mb-3 form-floating">
               <input class="form-control totalConnectedLoad" type="number"
-                id="totalConnectedLoad" min="1" step="1" data-fee="30">
+                id="totalConnectedLoad" min="1" step="1" data-fee="30"
+                data-min="0">
               <label class="form-label" for="totalConnectedLoad">Total Connected
-                Load</label>
+                Load (KVA)</label>
             </div>
 
             <button type="button"
@@ -366,14 +384,16 @@ input:valid {
         </div>
 
         <div class="row summary" style="display: none;">
-          <div
+          <div id="summary-table"
             class="col-md-6 col-12 offset-md-3 bg-primary-subtle rounded p-3">
             <h1>Summary</h1>
             <div class="summary-text">
               <h3 id="totalSqmSummary">Total Sqm: </h3>
+              <h4 id="lengthSummary">Length: </h4>
+              <h4 id="widthSummary">Width: </h4>
               <h3 id="quotationTotalSummary">Quotation: </h3>
 
-              <table class="table table-hover table-striped">
+              <table class="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -381,25 +401,22 @@ input:valid {
                     <th scope="col">Total Fee</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr >
-                    <td >No. of Floor(s)</td>
+                <tbody id="tbody">
+                  <tr id="floorCountSummaryRow">
+                    <td>No. of Floor(s)</td>
                     <td id="floorCountSummary">1</td>
                     <td id="floorCountPrice">0</td>
                   </tr>
-                  <tr >
-                    <td colspan="3"><h4 class="text-center">Plumbing (Every fixture in excess of one unit)</h4></td>
-                  </tr>
-                  <tr id="plumbingExcess">
-                    
-                  </tr>
+
                 </tbody>
               </table>
             </div>
 
             <button type="button"
-              class="btn btn-secondary float-start summary-back">Back</button>
-            <!-- <button type="button" class="btn btn-primary float-end summary-button">Summary</button> -->
+              class="btn btn-secondary float-start summary-back" data-html2canvas-ignore>Back</button>
+            <!-- <button type="submit" class="btn btn-primary float-end save-quote">Save
+              Quotation</button> -->
+              <input type="submit" class="btn btn-primary float-end save-quote" value="Send Quotation" data-html2canvas-ignore>
           </div>
         </div>
       </form>
@@ -429,6 +446,62 @@ input:valid {
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
       integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+      <script type="text/javascript">
+          window.onload = function() {
+              $('#form').on('keydown', function(event) {
+                  if (event.keyCode === 13) {
+                      event.preventDefault();
+                      return false;
+                  }
+              });
+
+              document.getElementById('form').addEventListener('submit', function(event) {
+                  event.preventDefault();
+
+                  html2canvas(document.querySelector("#summary-table")).then(canvas => {
+                      var base64 = canvas.toDataURL();
+                      // emailjs.send('service_v7zgn6u', 'template_hh63yl6', {
+                      //     content: base64
+                      // });
+                      $('.save-quote').attr('disabled', true);
+                      console.log(base64);
+
+                      const email = '21stfloordev@gmail.com';//$('#email').val();
+                      const subject = "JLT Quotation";
+                      const message = "New Quotation";
+                      let emailUrl = "https://amaff-dce3f29acc84.herokuapp.com/send-email";
+                      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                          emailUrl = "http://127.0.0.1:8000/send-email";
+                      } 
+                      // Send data via AJAX to Laravel endpoint
+                      $.ajax({
+                          url: emailUrl,
+                          method: 'POST',
+                          data: {
+                              email: email,
+                              subject: subject,
+                              message: message,
+                              image: base64
+                          },
+                          success: function(response) {
+                              console.log(response);
+                              alert('Email sent successfully!');
+                              $('.save-quote').removeAttr('disabled');
+                          },
+                          error: function(xhr, status, error) {
+                              console.error(error);
+                              alert('Failed to send email.');
+                              $('.save-quote').removeAttr('disabled');
+                          }
+                      });
+
+                    });
+              });
+          }
+      </script>
     <script>
   $(function(){
     $.get("navbar.html", function(data) {
@@ -442,7 +515,10 @@ input:valid {
         
         let summary = $('.summary-text');        
         $('#totalSqmSummary').text(`Total Sqm: ${totalSqm}`);
-        let quotationTotal = 0;
+        $('#widthSummary').text(`Width: ${$('#width').val()}m`);
+        $('#lengthSummary').text(`Length: ${$('#length').val()}m`);
+
+        quotationTotal = 0;
 
         let floorCount = parseInt($(`#floorNo`).val());
         $(`#floorCountSummary`).text(`x${floorCount}`);
@@ -452,44 +528,314 @@ input:valid {
 
         $('#buildingResidentialSqm').text(`${totalSqm}`);
 
-        $(`#plumbingExcess`).empty();
-
-        $(`#plumbingExcess`).append(`<td colspan="3">None</td>`);
+        $('#floorCountSummaryRow').nextAll().remove();
 
         let toAddExcessPlumbing = ``;
 
-        let numberOfWaterCloset = getNumberOfWaterCloset();
-        if(numberOfWaterCloset > 1){
-          let totalFee = 24;
-          totalFee += 7 * (numberOfWaterCloset-1);
-          quotationTotal += totalFee;
+        $('.hasPlumbingExcess').each(function(){
+          let fee = 24;
+          let count = parseInt($(this).val());
+          if(count > 0){
+            let min = parseInt($(this).data('min'));
+            let myFee = parseInt($(this).data('fee'));
+            if(min == 0){
+              fee = myFee * (count - min);
+            }
+            else if(count > min){
+              fee += myFee * (count - min);
+            }
 
-          toAddExcessPlumbing += `<th scope="row" >Number of water closets x${numberOfWaterCloset}</th>
-                    <td>7.00</td>
-                    <td>${totalFee}</td>`;
-        }
+            let description = $(this).data('description');
+            toAddExcessPlumbing += `<tr><th scope="row" >${description} x${count}</th>
+                    <td>${myFee}</td>
+                    <td>${fee}</td></tr>`;
+            quotationTotal += fee;
+          }
+        });
+
 
         if(toAddExcessPlumbing.length > 0){
-          $(`#plumbingExcess`).empty();
-          $(`#plumbingExcess`).append(toAddExcessPlumbing);
+          
+          let plumbingExcess = `<tr id="plumbingExcess" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Plumbing (Every fixture in excess of one unit)</h4></td>
+                  </tr>` + toAddExcessPlumbing;
+          $('tbody').find('tr:last').after(plumbingExcess);
         }
 
+        let toAddPlumbingSpecial = ``;
+
+        $('.hasPlumbingSpecial').each(function(){
+          toAddPlumbingSpecial += getProcessFees($(this));
+        });
+
+
+        if(toAddPlumbingSpecial.length > 0){
+          
+          let plumbingSpecial = `<tr id="plumbingSpecial" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Plumbing (Special Plumbing Fixtures)</h4></td>
+                  </tr>` + toAddPlumbingSpecial;
+          $('tbody').find('tr:last').after(plumbingSpecial);
+        }
+
+        let septicFee = 24;
+        let septicSize = parseFloat($(`#septicVaultSize`).val());
+        if (septicSize > 5){
+          septicFee += 7 * (septicSize-5);
+        }
+        let toAddSeptic = `<tr><th scope="row">Septic Vault</th>
+                  <td>${septicSize} cu. m.</td>
+                  <td>${formatCurrency(septicFee)}</td></tr>`;
+        quotationTotal += septicFee;
+        
+        let septic = `<tr id="septic" class="table-secondary">
+                  <td colspan="3"><h4 class="text-center">Plumbing(Construction of septic vault, applicable in all Groups)</h4></td>
+                </tr>` + toAddSeptic;
+        $('tbody').find('tr:last').after(septic);
+
+
+        let toAddCommercialAppliances = ``;
+        $('.hasCommercialAppliance').each(function(){
+          toAddCommercialAppliances += getProcessFees($(this));
+        });
+
+        if(toAddCommercialAppliances.length > 0){
+          
+          let commercialAppliances = `<tr id="commercialAppliances" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">(Appliances Equipment or Apparatus for Commercial/Industrial use)</h4></td>
+                  </tr>` + toAddCommercialAppliances;
+          $('tbody').find('tr:last').after(commercialAppliances);
+        }
+
+        let toAddCommercialEquipments = ``;
+        $('.hasCommercialEquipment').each(function(){
+          toAddCommercialEquipments += getProcessFees($(this));
+        });
+
+        if(toAddCommercialEquipments.length > 0){
+          
+          let commercialEquipments = `<tr id="commercialEquipments" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Appliances Equipment or Apparatus for Commercial/Industrial use)</h4></td>
+                  </tr>` + toAddCommercialEquipments;
+          $('tbody').find('tr:last').after(commercialEquipments);
+        }
+
+        let toAddMotionPicture = ``;
+        $('.hasMotion').each(function(){
+          toAddMotionPicture += getProcessFees($(this));
+        });
+
+        if(toAddMotionPicture.length > 0){
+          
+          let commercialMotion = `<tr id="commercialMotion" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Motion Picture Projector for commercial use)</h4></td>
+                  </tr>` + toAddMotionPicture;
+          $('tbody').find('tr:last').after(commercialMotion);
+        }        
+        
+        let toAddTV = ``;
+        $('.hasTV').each(function(){
+          toAddTV += getProcessFees($(this));
+        });
+
+        if(toAddTV.length > 0){
+          
+          let commercialTV = `<tr id="commercialTV" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(TV Cameras for commercial/industrial use)</h4></td>
+                  </tr>` + toAddTV;
+          $('tbody').find('tr:last').after(commercialTV);
+        }
+
+        let toAddSwitches = ``;
+        $(`.hasSwitches`).each(function(){
+          toAddSwitches += getProcessFees($(this));
+        });
+
+        if(toAddSwitches.length > 0){
+          
+          let switches = `<tr id="switches" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Electrical Fee)</h4></td>
+                  </tr>` + toAddSwitches;
+          $('tbody').find('tr:last').after(switches);
+        }
+
+        let toAddMotors = ``;
+        $('.hasMotors').each(function(){
+          toAddMotors += getProcessFees($(this));
+        });
+
+        if(toAddMotors.length > 0){
+          let motor20above = $(".motor20above");
+          let count = parseInt(motor20above.val());
+          if(count > 0){
+            let fee = 0;
+            let min = parseFloat(motor20above.data('min'));
+            let myFee = parseFloat(motor20above.data('fee'));
+            fee += myFee * 20 * count;
+            let description = "Number of " + $(`label[for="${motor20above.attr('id')}"]`).text();
+            toAddMotors += `<tr><th scope="row" >${description} x${count}</th>
+                    <td>${myFee}</td>
+                    <td>${fee}</td></tr>`;
+            quotationTotal += fee;
+          }
+
+          let commercialMotors = `<tr id="commercialMotors" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Motors and Controlling Apparatus, per unit)</h4></td>
+                  </tr>` + toAddMotors;
+          $('tbody').find('tr:last').after(commercialMotors);
+        }
+
+        let toAddGenerators = ``;
+        $('.hasGenerator').each(function(){
+          toAddGenerators += getProcessFees($(this));
+        });
+
+        if(toAddGenerators.length > 0){
+          let generators20above = $(".generators20above");
+          let count = parseInt(generators20above.val());
+          if(count > 0){
+            let fee = 0;
+            let min = parseFloat(generators20above.data('min'));
+            let myFee = parseFloat(generators20above.data('fee'));
+            fee += myFee * count;
+            let description = "Number of " + $(`label[for="${generators20above.attr('id')}"]`).text();
+            toAddGenerators += `<tr><th scope="row" >${description} x${count}</th>
+                    <td>${myFee}</td>
+                    <td>${fee}</td></tr>`;
+            quotationTotal += fee;
+          }
+
+          let generators = `<tr id="generators" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Generators/UPS Capacity(AC or DC), per unit)</h4></td>
+                  </tr>` + toAddGenerators;
+          $('tbody').find('tr:last').after(generators);
+        }
+
+        let toAddPole = ``;
+        $('.hasPole').each(function(){
+          toAddPole += getProcessFees($(this));
+        });
+
+        if(toAddPole.length > 0){
+          
+          let poles = `<tr id="poles" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Pole/Attachment Location Plan Permit)</h4></td>
+                  </tr>` + toAddPole;
+          $('tbody').find('tr:last').after(poles);
+        }
+
+        let loadsTotal = parseInt($(`.totalConnectedLoad`).val());
+        if(loadsTotal > 0){
+          let fee = 0;
+          if(loadsTotal < 1000){
+            fee = 6325 + (15 * (loadsTotal- 200));
+          }
+          else{
+            fee = 16825 + (10 * (loadsTotal - 1000));
+          }
+
+          quotationTotal += fee;
+          let toAddLoads = `<tr><th scrope="row">Total Aggregate Connected Load</th>
+                  <td>${loadsTotal} KVA</td>
+                  <td>${formatCurrency(fee)}</td></tr>`;
+
+          let loads = `<tr id="loads" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Aggregate Connected Load)</h4></td>
+                  </tr>` + toAddLoads;
+          $('tbody').find('tr:last').after(loads);
+        }
+
+
+        let transformerTotal = parseInt($(`.transformerCapacity`).val());
+        if(transformerTotal > 0){
+          let fee = 0;
+          if(transformerTotal <= 500){
+            fee = 40
+          }
+          else if(transformerTotal > 5 && transformerTotal <= 50){
+            fee = 40 + (5 * (transformerTotal - 5));
+          }
+          else if(transformerTotal > 50 && transformerTotal <= 300){
+            fee = 625 + (5 * (transformerTotal - 50));
+          }
+          else if(transformerTotal > 300 && transformerTotal <= 1000){
+            fee = 1265 + (3 * (transformerTotal - 300));
+          }
+          else if(transformerTotal > 0){
+            fee = 3365 + (2 * (transformerTotal - 1000));
+          }
+
+          quotationTotal += fee;
+          let toAddTransformer = `<tr><th scrope="row">Total Aggregate Transformer Capacity</th>
+                  <td>${transformerTotal} KVA</td>
+                  <td>${formatCurrency(fee)}</td></tr>`;
+
+          let transformers = `<tr id="transformers" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Aggregate Transformer Capacity)</h4></td>
+                  </tr>` + toAddTransformer;
+          $('tbody').find('tr:last').after(transformers);
+        }
+        
+        let generatorsTotal = parseInt($(`.generatorsCapacity`).val());
+        if(generatorsTotal > 0){
+          let fee = 0;
+          if(generatorsTotal <= 5){
+            fee = 40
+          }
+          else if(generatorsTotal > 5 && generatorsTotal <= 50){
+            fee = 40 + (5 * (generatorsTotal-5));
+          }
+          else if(generatorsTotal > 50 && generatorsTotal <= 300){
+            fee = 625 + (4 * (generatorsTotal-50));
+          }
+          else if(generatorsTotal > 300 && generatorsTotal <= 1000){
+            fee = 1265 + (3 * (generatorsTotal-300));
+          }
+          else if (generatorsTotal > 1000){            
+            fee = 3365 + (2 * (generatorsTotal-1000));
+          }
+
+          quotationTotal += fee;
+          let toAddGenerators = `<tr><th scrope="row">Total Aggregate Generators/UPS Capacity</th>
+                  <td>${generatorsTotal} KVA</td>
+                  <td>${formatCurrency(fee)}</td></tr>`;
+
+          let generators = `<tr id="generators" class="table-secondary">
+                    <td colspan="3"><h4 class="text-center">Electrical(Aggregate Generators/UPS Capacity)</h4></td>
+                  </tr>` + toAddGenerators;
+          $('tbody').find('tr:last').after(generators);
+        }
+        
+        
         $('#quotationTotalSummary').text(`Quotation: ${formatCurrency(quotationTotal)}`);
 
       }
 
-      function getNumberOfWaterCloset(){
-        let num = 0;
-        let waterClosets = $(`.restRoomWaterCloset`);
-        waterClosets.each(function() {
-            // Parse the value as a number and add it to the total
-            var value = parseFloat($(this).val()) || 0; // Parse as float or default to 0
-            num += value;
-        });
 
-        return num;
+
+      function getProcessFees(elem){
+        let row = ``;
+        let fee = 0;
+        let count = parseInt(elem.val());
+        if(count > 0){
+          let min = parseFloat(elem.data('min'));
+          let myFee = parseFloat(elem.data('fee'));
+          if(count > min){
+            fee += myFee * (count - min);
+          }
+          else{
+            fee = myFee;
+          }
+
+          let description = "Number of " + $(`label[for="${elem.attr('id')}"]`).text();
+          row += `<tr><th scope="row" >${description} x${count}</th>
+                  <td>${myFee}</td>
+                  <td>${fee}</td></tr>`;
+          quotationTotal += fee;
+        }
+        return row;
       }
 
+  var quotationTotal = 0;
   var totalSqm;
   var currentPage = 0;
   var pages;
@@ -621,37 +967,37 @@ input:valid {
               <h3>Electrical(Appliances for Commercial/Industrial use)</h3>
               
               <div class="mb-3 form-floating">
-                  <input class="form-control rangeHeater" type="number" id="rangeHeater" min="0" step="1">
+                  <input class="form-control rangeHeater hasCommercialAppliance" type="number" id="rangeHeater" min="0" step="1" data-fee="3" data-min="0">
                   <label class="form-label" for="rangeHeater">No. Range/Heater(Up to 1KW)</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control excessKW" type="number" id="excessKW" min="0" step="1">
+                  <input class="form-control excessKW hasCommercialAppliance" type="number" id="excessKW" min="0" step="1" data-fee="1.5" data-min="0">
                   <label class="form-label" for="excessKW">Excess of 1KW</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control freezer" type="number" id="freezer" min="0" step="1">
+                  <input class="form-control freezer hasCommercialAppliance" type="number" id="freezer" min="0" step="1" data-fee="5" data-min="0">
                   <label class="form-label" for="freezer">No. Freezer</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control washingMachine" type="number" id="washingMachine" min="0" step="1">
+                  <input class="form-control washingMachine hasCommercialAppliance" type="number" id="washingMachine" min="0" step="1" data-fee="5" data-min="0">
                   <label class="form-label" for="washingMachine">No. Washing Machine/Dryer</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control hairDryer" type="number" id="hairDryer" min="0" step="1">
+                  <input class="form-control hairDryer hasCommercialAppliance" type="number" id="hairDryer" min="0" step="1" data-fee="5" data-min="0">
                   <label class="form-label" for="hairDryer">No. Hair Curling/Hair Dryer</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control electricFan" type="number" id="electricFan" min="0" step="1">
+                  <input class="form-control electricFan hasCommercialAppliance" type="number" id="electricFan" min="0" step="1" data-fee="3" data-min="0">
                   <label class="form-label" for="electricFan">No. Fixed type Electric Fan</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control typewriter" type="number" id="typewriter" min="0" step="1">
+                  <input class="form-control typewriter hasCommercialAppliance" type="number" id="typewriter" min="0" step="1" data-fee="3" data-min="0">
                   <label class="form-label" for="typewriter">No. Typewriter/Cash Register/Adding Machine</label>
               </div>
 
@@ -666,52 +1012,52 @@ input:valid {
               <h3>Electrical(Appliances Equipment or Apparatus for Commercial/Industrial use)</h3>
               
               <div class="mb-3 form-floating">
-                  <input class="form-control electricBell" type="number" id="electricBell" min="0" step="1">
+                  <input class="form-control electricBell hasCommercialEquipment" type="number" id="electricBell" min="0" step="1" data-fee="5" data-min="0">
                   <label class="form-label" for="electricBell">No. Electric Bell/Announciator System</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control arcLight" type="number" id="arcLight" min="0" step="1">
+                  <input class="form-control arcLight hasCommercialEquipment" type="number" id="arcLight" min="0" step="1" data-fee="5" data-min="0">
                   <label class="form-label" for="arcLight">No. Arc Light/Lamp</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control flasher" type="number" id="flasher" min="0" step="1">
+                  <input class="form-control flasher hasCommercialEquipment" type="number" id="flasher" min="0" step="1" data-fee="5" data-min="0">
                   <label class="form-label" for="flasher">No. Flasher/Beacon Light</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control xray" type="number" id="xray" min="0" step="1" data-fee="30">
+                  <input class="form-control xray hasCommercialEquipment" type="number" id="xray" min="0" step="1" data-fee="30" data-min="0">
                   <label class="form-label" for="xray">No. X-Ray Equipment</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control fireAlarm" type="number" id="fireAlarm" min="0" step="1" data-fee="3">
+                  <input class="form-control fireAlarm hasCommercialEquipment" type="number" id="fireAlarm" min="0" step="1" data-fee="3" data-min="0">
                   <label class="form-label" for="fireAlarm">No. Fire Alarm Unit</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control batterCharging" type="number" id="batterCharging" min="0" step="1" data-fee="15">
+                  <input class="form-control batterCharging hasCommercialEquipment" type="number" id="batterCharging" min="0" step="1" data-fee="15" data-min="0">
                   <label class="form-label" for="batterCharging">No. Battery Charging Rectifier</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control welder" type="number" id="welder" min="0" step="1" data-fee="5">
+                  <input class="form-control welder hasCommercialEquipment" type="number" id="welder" min="0" step="1" data-fee="5" data-min="0">
                   <label class="form-label" for="welder">No. Electric Welder(Up to 1 KVA/KW)</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control neonSign" type="number" id="neonSign" min="0" step="1" data-fee="3">
+                  <input class="form-control neonSign hasCommercialEquipment" type="number" id="neonSign" min="0" step="1" data-fee="3" data-min="0">
                   <label class="form-label" for="neonSign">No. Neon Sign</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control neonSignTransformer" type="number" id="neonSignTransformer" min="0" step="1" data-fee="3">
+                  <input class="form-control neonSignTransformer hasCommercialEquipment" type="number" id="neonSignTransformer" min="0" step="1" data-fee="3" data-min="0">
                   <label class="form-label" for="neonSignTransformer">No. Neon Sign Transformer</label>
               </div>
 
               <div class="mb-3 form-floating">
-                  <input class="form-control neonSign" type="number" id="neonSign" min="0" step="1" data-fee="3">
+                  <input class="form-control neonSign" type="number" id="neonSign" min="0" step="1" data-fee="3" data-min="0">
                   <label class="form-label" for="neonSign">No. Neon Sign<label>
               </div>
 
@@ -726,17 +1072,17 @@ input:valid {
             class="col-md-4 col-12 offset-md-4 bg-primary-subtle rounded p-3">
             <h3>Electrical(Motion Picture Projector for commercial use)</h3>
             <div class="mb-3 form-floating">
-              <input class="form-control motion16" type="number" id="motion16" min="1" step="1" data-fee="80">
+              <input class="form-control motion16 hasMotion" type="number" id="motion16" min="1" step="1" data-fee="80" data-min="0">
               <label class="form-label" for="motion16">No. 16mm</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control motion35" type="number" id="motion35" min="1" step="1" data-fee="100">
+              <input class="form-control motion35 hasMotion" type="number" id="motion35" min="1" step="1" data-fee="100" data-min="0">
               <label class="form-label" for="motion35">No. 35mm</label>
             </div>
 
             <div class="mb-3 form-floating">
-              <input class="form-control motion70" type="number" id="motion70" min="1" step="1" data-fee="180">
+              <input class="form-control motion70 hasMotion" type="number" id="motion70" min="1" step="1" data-fee="180" data-min="0">
               <label class="form-label" for="motion70">No. 70mm and above</label>
             </div>
 
@@ -810,76 +1156,85 @@ input:valid {
                             <label class="form-label" for="floorRestroomWidth${i}">Restroom Width</label>
                         </div>                        
                         <div class="mb-3 form-floating">
-                            <input class="form-control restRoomWaterCloset" type="number" id="restRoomWaterCloset${i}" min="1" step="1" data-required>
+                            <input class="form-control restRoomWaterCloset hasPlumbingExcess" type="number" id="restRoomWaterCloset${i}" min="1" step="1" data-required data-description="Number of water closets" data-fee="7" data-min="1">
                             <label class="form-label" for="restRoomWaterCloset${i}">Water Closet</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control restRoomFloorDrain" type="number" id="restRoomFloorDrain${i}" min="1" step="1" data-required>
+                            <input class="form-control restRoomFloorDrain hasPlumbingExcess" type="number" id="restRoomFloorDrain${i}" min="1" step="1" data-required data-description="Number of floor drains" data-fee="3" data-min="2">
                             <label class="form-label" for="restRoomFloorDrain${i}">Floor Drain</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control restRoomSink" type="number" id="restRoomSink${i}" min="0" step="1" value="0">
-                            <label class="form-label" for="restRoomSink${i}">Sink</label>
+                            <input class="form-control restRoomSink hasPlumbingExcess" type="number" id="restRoomSink${i}" min="0" step="1" value="0" data-description="Number of restroom sink" data-fee="3" data-min="1">
+                            <label class="form-label" for="restRoomSink${i}">Restroom Sink</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control restRoomLavatory" type="number" id="restRoomLavatory${i}" min="0" value="0" step="1">
+                            <input class="form-control restRoomLavatory hasPlumbingExcess" type="number" id="restRoomLavatory${i}" min="0" value="0" step="1" data-description="Number of Lavatory" data-fee="7" data-min="1">
                             <label class="form-label" for="restRoomLavatory${i}">Lavatory</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control restRoomFaucet" type="number" id="restRoomFaucet${i}" min="0" value="0" step="1">
+                            <input class="form-control restRoomFaucet hasPlumbingExcess" type="number" id="restRoomFaucet${i}" min="0" value="0" step="1" data-description="Number of Faucets" data-fee="2" data-min="3">
                             <label class="form-label" for="restRoomFaucet${i}">Faucet</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control restRoomUrinal" type="number" id="restRoomUrinal${i}" min="0" value="0" step="1">
+                            <input class="form-control restRoomShower hasPlumbingExcess" type="number" id="restRoomShower${i}" min="0" value="0" step="1" data-description="Number of Shower head" data-fee="2" data-min="1">
+                            <label class="form-label" for="restRoomShower${i}">Urinal</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input class="form-control restRoomUrinal hasPlumbingExcess" type="number" id="restRoomUrinal${i}" min="0" value="0" step="1" data-description="Number of Urinal" data-fee="4" data-min="0">
                             <label class="form-label" for="restRoomUrinal${i}">Urinal</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control restRoomBathTub" type="number" id="restRoomBathTub${i}" min="0" value="0" step="1">
+                            <input class="form-control restRoomBathTub hasPlumbingExcess" type="number" id="restRoomBathTub${i}" min="0" value="0" step="1" data-description="Number of Bath Tub" data-fee="7" data-min="0">
                             <label class="form-label" for="restRoomBathTub${i}">Bath tub</label>
                         </div>
                       </div>
+                      
                         <div class="mb-3 form-floating">
-                            <input class="form-control waterMeter" type="number" id="waterMeter${i}" placeholder="12mm - 25mm and above" min="12" value="12" step="0.1" data-required>
+                            <input class="form-control waterMeter " type="number" id="waterMeter${i}" placeholder="12mm - 25mm and above" min="12" value="12" step="0.1" data-required>
                             <label class="form-label" for="waterMeter${i}">Water Meter size(mm)</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control greaseTrap" type="number" id="greaseTrap${i}" min="0" value="0" step="1">
+                            <input class="form-control restRoomSink hasPlumbingSpecial" type="number" id="sink${i}" min="0" step="1" value="0" data-description="Number of sink" data-fee="7" data-min="0">
+                            <label class="form-label" for="sink${i}">Sink</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input class="form-control greaseTrap hasPlumbingSpecial" type="number" id="greaseTrap${i}" min="0" value="0" step="1" data-description="Number of Grease Trap" data-fee="7" data-min="0">
                             <label class="form-label" for="greaseTrap${i}">Grease Trap</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control garageTrap" type="number" id="garageTrap${i}" min="0" value="0" step="1">
+                            <input class="form-control garageTrap hasPlumbingSpecial" type="number" id="garageTrap${i}" min="0" value="0" step="1" data-fee="7" data-min="0">
                             <label class="form-label" for="garageTrap${i}">Garage Trap</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control bidet" type="number" id="bidet${i}" min="0" value="0" step="1">
+                            <input class="form-control bidet hasPlumbingSpecial" type="number" id="bidet${i}" min="0" value="0" step="1" data-fee="4" data-min="0">
                             <label class="form-label" for="bidet${i}">Bidet</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control dentalCuspidor" type="number" id="dentalCuspidor${i}" min="0" value="0" step="1">
+                            <input class="form-control dentalCuspidor hasPlumbingSpecial" type="number" id="dentalCuspidor${i}" min="0" value="0" step="1" data-fee="4" data-min="0">
                             <label class="form-label" for="dentalCuspidor${i}">Dental Cupsidor</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control gasFiredWaterHeater" type="number" id="gasFiredWaterHeater${i}" min="0" value="0" step="1">
+                            <input class="form-control gasFiredWaterHeater hasPlumbingSpecial" type="number" id="gasFiredWaterHeater${i}" min="0" value="0" step="1" data-fee="4" data-min="0">
                             <label class="form-label" for="gasFiredWaterHeater${i}">Gas-Fired water heater</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control drinkingFountain" type="number" id="drinkingFountain${i}" min="0" value="0" step="1">
+                            <input class="form-control drinkingFountain hasPlumbingSpecial" type="number" id="drinkingFountain${i}" min="0" value="0" step="1" data-fee="2" data-min="0">
                             <label class="form-label" for="drinkingFountain${i}">Drinking Fountain</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control barSodaFountainSink" type="number" id="barSodaFountainSink${i}" min="0" value="0" step="1">
+                            <input class="form-control barSodaFountainSink hasPlumbingSpecial" type="number" id="barSodaFountainSink${i}" min="0" value="0" step="1" data-fee="4" data-min="0">
                             <label class="form-label" for="barSodaFountainSink${i}">Bar/Soda Fountain Sink</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control laundrySink" type="number" id="laundrySink${i}" min="0" value="0" step="1">
+                            <input class="form-control laundrySink hasPlumbingSpecial" type="number" id="laundrySink${i}" min="0" value="0" step="1" data-fee="4" data-min="0">
                             <label class="form-label" for="laundrySink${i}">Laundry Sink</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control laboratorySink" type="number" id="laboratorySink${i}" min="0" value="0" step="1">
+                            <input class="form-control laboratorySink hasPlumbingSpecial" type="number" id="laboratorySink${i}" min="0" value="0" step="1" data-fee="4" data-min="0">
                             <label class="form-label" for="laboratorySink${i}">Laboratory Sink</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input class="form-control fixedTyeSterilizer" type="number" id="fixedTyeSterilizer${i}" min="0" value="0" step="1">
+                            <input class="form-control fixedTyeSterilizer hasPlumbingSpecial" type="number" id="fixedTyeSterilizer${i}" min="0" value="0" step="1" data-fee="2" data-min="0">
                             <label class="form-label" for="fixedTyeSterilizer${i}">Fixed-Tye Sterilizer</label>
                         </div>
                     
