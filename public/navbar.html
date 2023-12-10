@@ -1,3 +1,70 @@
+
+<style>
+  #quotationLink {
+    display: none;
+  }
+  #signIn {
+    display: block;
+  }
+  #signOutLink {
+    display: none;
+  }
+  </style>
+  
+<script>
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyCSW7UMHtJDdRJga5oSEHgppvUsLRtagx0",
+    authDomain: "jt25-fae27.firebaseapp.com",
+    storageBucket: "jt25-fae27.appspot.com",
+    messagingSenderId: "590615766263",
+    appId: "1:590615766263:web:95dc99f6487ba0693a1ff2",
+    measurementId: "G-QB2Z7JDN2V"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  let quotationLink = document.getElementById('quotationLink');
+  var signIn = document.getElementById('signIn');  
+  var signOutLink = document.getElementById('signOutLink');
+ 
+  var currentUser = null;
+  firebase.auth().onAuthStateChanged(function(User) {
+    if (User) {
+      quotationLink.style.display = 'block';  
+      signIn.style.display = 'none';
+      signOutLink.style.display = 'block';
+    }else{
+      
+      currentUser = null;
+
+      if (window.location.pathname.endsWith('Quotation.html')) {
+          window.location.replace('loginSignUp.html'); // Change to your login/sign-up page URL
+        }
+
+    }
+    
+  });
+
+  // Select the sign out button
+var signOutButton = document.getElementById('signOutLink');
+
+// Create an event listener for the sign out button
+signOutButton.addEventListener('click', function() {
+  event.preventDefault();
+    firebase.auth().signOut()
+    .then(() => {
+        // Sign-out successful.
+        console.log('User signed out.');
+        alert('You have successfully signed out.');
+        window.location.replace('loginSignUp.html'); // Change to your login/sign-up page URL
+    }).catch((error) => {
+        // An error happened.
+        console.log('Error signing out:', error);
+        alert('Error signing out.');
+    });
+});
+  </script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">
@@ -16,12 +83,17 @@
             <a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfyNSatpshOEoCTmX16cZmfTqI3ruMK9FcJexK-f5weIxJ7eg/viewform?embedded=true" target="_blank">Contact Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Quotation.html">Quotation</a>
+            <a id="quotationLink" class="nav-link" href="Quotation.html">Quotation</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://www.facebook.com/profile.php?id=61551045083008" target="_blank">Facebook</a>
           </li>
-        </ul>
+          <li class="nav-item">
+            <a id="signIn" class="nav-link" href="loginSignUp.html">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a id="signOutLink" class="nav-link" href="index.html">Sign Out</a>
+          </li>
       </div>
     </div>
   </nav>
