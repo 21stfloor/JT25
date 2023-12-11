@@ -689,19 +689,22 @@ input:valid {
 
         $('#floorCountSummaryRow').nextAll().remove();
 
-        let materialsRows = `<tr><td colspan="2" >Wall Material: ${selectedWall}</td>
-                    <td>${selectedWallPrice}</td></tr>`;
+        let materialsRows = `<tr><th  scope="row" >Wall Material: ${selectedWall}</th>
+                    <td>${selectedWallPrice} per sqm</td>
+                    <td>Total:${selectedWallPrice * totalSqm}</td></tr>`;
 
-        quotationTotal += selectedWallPrice;
+        quotationTotal += selectedWallPrice * totalSqm;
 
-        materialsRows += `<tr><td colspan="2" >Wall Floor: ${selectedFloor}</td>
-                    <td>${selectedFloorPrice}</td></tr>`;
+        materialsRows += `<tr><th scope="row" >Wall Floor: ${selectedFloor}</th>
+                    <td>${selectedFloorPrice} per sqm</td>
+                    <td>Total:${selectedFloorPrice * totalSqm}</td></tr>`;
 
-                    quotationTotal += selectedFloorPrice;
-        materialsRows += `<tr><td colspan="2" >Wall Ceiling: ${selectedCeiling}</td>
-                    <td>${selectedCeilingPrice}</td></tr>`;
+                    quotationTotal += selectedFloorPrice * totalSqm;
+        materialsRows += `<tr><th scope="row" >Wall Ceiling: ${selectedCeiling}</th>
+                    <td>${selectedCeilingPrice} per sqm</td>
+                    <td>Total:${selectedCeilingPrice * totalSqm}</td></tr>`;
 
-                    quotationTotal += selectedCeilingPrice;
+                    quotationTotal += selectedCeilingPrice * totalSqm;
           
         let materials = `<tr id="plumbingExcess" class="table-secondary">
                   <td colspan="3"><h4 class="text-center">Materials</h4></td>
