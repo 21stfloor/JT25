@@ -1,14 +1,4 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyCSW7UMHtJDdRJga5oSEHgppvUsLRtagx0",
-    authDomain: "jt25-fae27.firebaseapp.com",
-    projectId: "jt25-fae27",
-    storageBucket: "jt25-fae27.appspot.com",
-    messagingSenderId: "590615766263",
-    appId: "1:590615766263:web:95dc99f6487ba0693a1ff2",
-    measurementId: "G-QB2Z7JDN2V"
-  };
-  
-  firebase.initializeApp(firebaseConfig);
+
   
   // Select the form elements
   var loginEmail = document.getElementById('email');
@@ -31,11 +21,12 @@ const firebaseConfig = {
     var email = loginEmail.value;
     var password = loginPassword.value;
   
-    if (email == "" || password == "") {
-        alert("Please fill out all fields");
+    if (email.trim() == "" || password.trim() == "") {
+        bootbox.alert("Please fill out all fields");
         return false;
     }
-    firebase.auth().signInWithEmailAndPassword(email, password)
+
+    auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
@@ -73,33 +64,58 @@ const firebaseConfig = {
     var password = registerPassword.value;
     var confirmPassword = registerConfirmPassword.value;
 
-    if (password !== confirmPassword) {
-        alert('Password do not match.');
-        return; // Exit the function to prevent further execution
+    if (email.trim() == "" || fullName.trim() == "") {
+        bootbox.alert("Please fill out all the required fields!");
+        return false;
+    }
+
+    if (password.trim() != confirmPassword.trim()) {
+        bootbox.alert('Password do not match!');
+        return false;
+    }
+
+    if( password.trim().length < 6){
+        bootbox.alert("Password length must be at least 6 characters!");
+        return false;
     }
   
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+    auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
         // Signed in 
         var user = userCredential.user;
+        var uid = user.uid; // Get the UID of the authenticated user
         console.log(user);
-        alert("Registration Successful");
-        window.location.href = "loginSignUp.html";
+        // Save user data to Firestore
+        db.collection('users').doc(uid).set({
+            fullName: fullName,
+            birthday: birthday,
+            address: address,
+            phoneNumber: phoneNumber,
+            email: email,
+            uid: uid // Save the UID in the document
+        })
+        .then(() => {
+            console.log("User data saved!");
+            bootbox.alert("Registration Successful");
+            window.location.href = "loginSignUp.html";
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+            bootbox.alert("Error saving user data.");
+        });
     })
     .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
         if (errorCode === 'auth/email-already-in-use') {
-            alert('Email already in use.');
+            bootbox.alert('Email already in use.');
         } else if (errorCode === 'auth/weak-password') {
-            alert('Password should be at least 6 characters.');
-        }else if (errorCode === 'auth/invalid-email') {
-            alert('Invalid email.');
-        }else{
-            alert(errorMessage);
+            bootbox.alert('Password should be at least 6 characters.');
+        } else if (errorCode === 'auth/invalid-email') {
+            bootbox.alert('Invalid email.');
+        } else {
+            bootbox.alert(errorMessage);
         }
     });
-  });
-
-  
+});

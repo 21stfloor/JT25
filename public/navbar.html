@@ -12,39 +12,12 @@
   </style>
   
 <script>
-  
-  const firebaseConfig = {
-    apiKey: "AIzaSyCSW7UMHtJDdRJga5oSEHgppvUsLRtagx0",
-    authDomain: "jt25-fae27.firebaseapp.com",
-    storageBucket: "jt25-fae27.appspot.com",
-    messagingSenderId: "590615766263",
-    appId: "1:590615766263:web:95dc99f6487ba0693a1ff2",
-    measurementId: "G-QB2Z7JDN2V"
-  };
 
-  firebase.initializeApp(firebaseConfig);
-  let quotationLink = document.getElementById('quotationLink');
-  var signIn = document.getElementById('signIn');  
-  var signOutLink = document.getElementById('signOutLink');
- 
-  var currentUser = null;
-  firebase.auth().onAuthStateChanged(function(User) {
-    if (User) {
-      quotationLink.style.display = 'block';  
-      signIn.style.display = 'none';
-      signOutLink.style.display = 'block';
-    }else{
-      
-      currentUser = null;
-
-      if (window.location.pathname.endsWith('Quotation.html')) {
-          window.location.replace('loginSignUp.html'); // Change to your login/sign-up page URL
-        }
-
-    }
-    
-  });
-
+  if(currentUser){
+    quotationLink.style.display = 'block';  
+    signIn.style.display = 'none';
+    signOutLink.style.display = 'block';
+  }
   // Select the sign out button
 var signOutButton = document.getElementById('signOutLink');
 
@@ -92,7 +65,7 @@ signOutButton.addEventListener('click', function() {
             <a id="signIn" class="nav-link" href="loginSignUp.html">Sign In</a>
           </li>
           <li class="nav-item">
-            <a id="signOutLink" class="nav-link" href="index.html">Sign Out</a>
+            <a id="signOutLink" class="nav-link btn " role="button">Sign Out</a>
           </li>
       </div>
     </div>
