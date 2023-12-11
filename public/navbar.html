@@ -28,7 +28,7 @@ signOutButton.addEventListener('click', function() {
     .then(() => {
         // Sign-out successful.
         console.log('User signed out.');
-        alert('You have successfully signed out.');
+        // bootbox.alert('You have successfully signed out.');
         window.location.replace('loginSignUp.html'); // Change to your login/sign-up page URL
     }).catch((error) => {
         // An error happened.

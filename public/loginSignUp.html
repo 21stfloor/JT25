@@ -36,14 +36,14 @@
 				<h2>LOGIN</h2>
 				<input type="text" placeholder="Email" id="email" required>
 				<input type="password" placeholder="Password" id="password" required>
-                <a href="#" id="forgot-password">Forgot Password?</a>
+                <!-- <a href="#" id="forgot-password">Forgot Password?</a> -->
                 <button id="login" class="btn btn-secondary align-right">Login</button>
-            <div id="forgot-password-modal" style="display: none;">
+            <!-- <div id="forgot-password-modal" style="display: none;">
                 <h2>Reset Password</h2>
                 <input type="text" placeholder="Email">
                 <button id="resetPassword" class="btn btn-secondary align-right">Send Reset Link</button>
                 <a href="#" id="close-modal">Close</a>
-            </div> 
+            </div>  -->
 			</div>
             
             <div class="register-show">
@@ -82,7 +82,7 @@
         if(auth.currentUser){
             window.location.replace("index.html");
         }
-        
+
         flatpickr("#birthday");
 
     $('.login-info-box').fadeOut();

@@ -31,7 +31,7 @@
         // Signed in
         var user = userCredential.user;
         console.log(user);
-        alert("Login Successful");
+        // alert("Login Successful");
         window.location.href = "index.html";
     })
     .catch((error) => {
