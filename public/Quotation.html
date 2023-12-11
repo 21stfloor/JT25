@@ -118,6 +118,34 @@ input:valid {
           </div>
         </div>
 
+        <div class="row page" style="display: none;">
+          <div
+            class="col-md-4 col-8 offset-md-4 offset-2 bg-primary-subtle rounded p-3">
+
+            <div class="mb-3 material">
+              <p class="price mt-3 fw-bold">Price: <span class="price-value"></span></p>
+              <label for="materialWallSelect">Select Wall Material</h1>
+              <select id="materialWallSelect" class="form-control mt-3"></select>
+          </div>
+
+          <div class="mb-3 material">
+            <p class="price mt-3 fw-bold">Price: <span class="price-value"></span></p>
+            <label for="materialFloorSelect">Select Floor Material</h1>
+            <select id="materialFloorSelect" class="form-control mt-3"></select>
+        </div>
+
+        <div class="mb-3 material">
+          <p class="price mt-3 fw-bold">Price: <span class="price-value"></span></p>
+          <label for="materialCeilingSelect">Select Ceiling Material</h1>
+          <select id="materialCeilingSelect" class="form-control mt-3"></select>
+      </div>
+
+      <button type="button"
+              class="btn btn-secondary float-start back-button">Back</button>
+            <button type="button" class="btn btn-primary float-end next-button">Next</button>
+        </div>
+      </div>
+
         
 
         <div class="row page" style="display: none;">
@@ -138,6 +166,8 @@ input:valid {
         <div class="floors">
 
         </div>
+
+        
 
         <div class="row page" style="display: none;">
           <div
@@ -465,7 +495,116 @@ input:valid {
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
+        var selectedWall = 'None';
+        var selectedWallPrice = 0;
+        var selectedFloor = 'None';
+        var selectedFloorPrice = 0;
+        var selectedCeiling = 'None';
+        var selectedCeilingPrice = 0;
+
           window.onload = function() {
+
+            $('#materialWallSelect, #materialFloorSelect, #materialCeilingSelect').change(function() {
+                var selectedValue = $(this).val();
+                console.log("Selected value:", selectedValue);
+                var selectedOption = $(this).find(':selected');
+                
+                var priceValue = selectedOption.data('price');
+                
+                if($(this).attr('id') == 'materialWallSelect'){
+                  selectedWall = $(selectedOption).text();
+                  selectedWallPrice = priceValue;
+                }
+                else if($(this).attr('id') == 'materialFloorSelect'){
+                  selectedFloor = $(selectedOption).text();
+                  selectedFloorPrice = priceValue;
+                }
+                else if($(this).attr('id') == 'materialCeilingSelect'){
+                  selectedCeiling = $(selectedOption).text();
+                  selectedCeilingPrice = priceValue;
+                }
+
+
+                $(this).closest('.material').find('.price-value').text(priceValue);
+                // You can perform actions based on the selected value here
+                // For example, fetching additional data from Firestore or other operations
+            });
+
+            var materialWallSelect = document.getElementById("materialWallSelect");
+
+            var option = document.createElement("option");
+                        option.value = "None";
+                        option.text = "None";
+                        $(option).attr('data-price', 0);
+            materialWallSelect.appendChild(option);
+
+            db.collection('materials').where('type', '==', 'wall')
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        var option = document.createElement("option");
+                        option.value = doc.id;
+                        option.text = doc.data().name; // Assuming 'name' is a field in your documents
+                        $(option).attr('data-price', doc.data().price);
+                        materialWallSelect.appendChild(option);
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+
+                var materialFloorSelect = document.getElementById("materialFloorSelect");
+                option = document.createElement("option");
+                        option.value = "None";
+                        option.text = "None";
+                        $(option).attr('data-price', 0);
+                materialFloorSelect.appendChild(option);
+            db.collection('materials').where('type', '==', 'floor')
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        var option = document.createElement("option");
+                        option.value = doc.id;
+                        option.text = doc.data().name; // Assuming 'name' is a field in your documents
+                        $(option).attr('data-price', doc.data().price);
+                        materialFloorSelect.appendChild(option);
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+
+              
+                var materialCeilingSelect = document.getElementById("materialCeilingSelect");
+                option = document.createElement("option");
+                        option.value = "None";
+                        option.text = "None";
+                        $(option).attr('data-price', 0);
+                materialCeilingSelect.appendChild(option);
+            db.collection('materials').where('type', '==', 'ceiling')
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        var option = document.createElement("option");
+                        option.value = doc.id;
+                        option.text = doc.data().name; // Assuming 'name' is a field in your documents
+                        $(option).attr('data-price', doc.data().price);
+                        materialCeilingSelect.appendChild(option);
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+
+
+              document.getElementById('form').addEventListener('keypress', function(e) {
+                  // Check if Enter key is pressed
+                  if (e.key === 'Enter') {
+                      // Prevent default form submission
+                      e.preventDefault();
+                  }
+              });
+
               $('#form').on('keydown', function(event) {
                   if (event.keyCode === 13) {
                       event.preventDefault();
@@ -549,6 +688,19 @@ input:valid {
         $('#buildingResidentialSqm').text(`${totalSqm}`);
 
         $('#floorCountSummaryRow').nextAll().remove();
+
+        let materialsRows = `<tr><td colspan="2" >Wall Material: ${selectedWall}</td>
+                    <td>${selectedWallPrice}</td></tr>`;
+
+        materialsRows += `<tr><td colspan="2" >Wall Floor: ${selectedFloor}</td>
+                    <td>${selectedFloorPrice}</td></tr>`;
+        materialsRows += `<tr><td colspan="2" >Wall Ceiling: ${selectedCeiling}</td>
+                    <td>${selectedCeilingPrice}</td></tr>`;
+          
+        let materials = `<tr id="plumbingExcess" class="table-secondary">
+                  <td colspan="3"><h4 class="text-center">Plumbing (Every fixture in excess of one unit)</h4></td>
+                </tr>` + materialsRows;
+        $('tbody').find('tr:last').after(materials);
 
         let toAddExcessPlumbing = ``;
 
@@ -1159,7 +1311,7 @@ input:valid {
                 <div class="col-md-4 col-12 offset-md-4  bg-primary-subtle rounded p-3">
                     <h3>${getOrdinal(i + 1)} Floor</h3>
 
-                    
+
 
                     <div class="mb-3">
                         <div class="form-check form-switch">
