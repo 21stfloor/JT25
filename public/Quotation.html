@@ -424,6 +424,8 @@ input:valid {
               <h4 id="lengthSummary">Length: </h4>
               <h4 id="widthSummary">Width: </h4>
               <h3 id="quotationTotalSummary">Quotation: </h3>
+              <p class="fw-bolder" id="quotationMonthsSummary">Estimated months </p>
+              
 
               <table class="table table-hover">
                 <thead>
@@ -670,6 +672,43 @@ input:valid {
 </script>
 
     <script>
+      function calculateMonthsAndDays(squareMeters) {
+          // Define the known data points
+          const knownData = [
+              { sqm: 100, months: 1 },
+              { sqm: 500, months: 3 }
+              // Add more data points as needed
+          ];
+
+          // Find the two known data points that are closest to the given squareMeters
+          let smallerPoint = knownData[0];
+          let largerPoint = knownData[1];
+          for (let i = 1; i < knownData.length; i++) {
+              if (knownData[i].sqm <= squareMeters) {
+                  smallerPoint = knownData[i];
+                  largerPoint = knownData[i + 1] || knownData[i]; // Handles the case when reaching the end of the array
+              } else {
+                  break;
+              }
+          }
+
+          // Calculate the estimated months based on linear interpolation
+          const monthsDifference = largerPoint.months - smallerPoint.months;
+          const sqmDifference = largerPoint.sqm - smallerPoint.sqm;
+          const sqmRelativeToSmaller = squareMeters - smallerPoint.sqm;
+          const estimatedMonths = smallerPoint.months + (sqmRelativeToSmaller / sqmDifference) * monthsDifference;
+
+          // Calculate days based on the estimated months
+          const remainingMonths = estimatedMonths % 1;
+          const daysInMonth = remainingMonths * 30; // Assuming 30 days per month for simplicity
+
+          return {
+              months: Math.floor(estimatedMonths),
+              days: Math.round(daysInMonth)
+          };
+      }
+
+
       function updateSummary(){
         
         let summary = $('.summary-text');        
@@ -688,6 +727,9 @@ input:valid {
         $('#buildingResidentialSqm').text(`${totalSqm}`);
 
         $('#floorCountSummaryRow').nextAll().remove();
+
+        
+
 
         let materialsRows = `<tr><th  scope="row" >Wall Material: ${selectedWall}</th>
                     <td>${selectedWallPrice} per sqm</td>
@@ -988,6 +1030,11 @@ input:valid {
         
         
         $('#quotationTotalSummary').text(`Quotation: ${formatCurrency(quotationTotal)}`);
+
+        // Test the function with a value
+          // const sqm = 300; // Change this value to test with different square meters
+          const { months, days } = calculateMonthsAndDays(totalSqm);
+          $('#quotationMonthsSummary').text(`For ${totalSqm} square meters, it will take approximately ${months} Months and ${days} Days.`);
       }
 
 
