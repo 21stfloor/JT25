@@ -1,80 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
 
-    <title>Login System</title>
-    <link rel="stylesheet" href="css/style.css" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <title>Login System</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-</head>
-<body>
+    </head>
+    <body>
 
+        <div class="container  d-block d-sm-none">
+            <div class="row accordion" id="accordionExample">
+                <div class="col-md-6 accordion-item">
+                    <button class="accordion-button" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                        <h2 class="accordion-header">Login</h2>
+                    </button>
 
+                    <form id="collapseOne"
+                        class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="form-group">
+                                <label for="loginEmailMobile">Email address</label>
+                                <input type="email" class="form-control"
+                                    id="loginEmailMobile" placeholder="Enter email"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPasswordMobile">Password</label>
+                                <input type="password" class="form-control"
+                                    id="loginPasswordMobile" placeholder="Password"
+                                    required>
+                            </div>
 
-<!------ Include the above in your HEAD tag ---------->
+                            <button type="submit" class="btn btn-primary" id="loginMobile">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 accordion-item">
+                    <button class="accordion-button" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <h2 class="accordion-header">Register</h2>
+                    </button>
+                    <form id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <input type="text" id="fullNameMobile" class="form-control mb-2" placeholder="Full Name"
+                                required>
+                            <input type="date" id="birthdayMobile" class="form-control mb-2" placeholder="Birthday"
+                                required>
+                            <input type="text" id="addressMobile" class="form-control mb-2" placeholder="Address"
+                                required>
+                            <input type="text" id="phoneNumberMobile"
+                                placeholder="Phone Number"class="form-control" 
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                maxlength="11" required />
+                            <div class="form-group">
+                                <label for="registerEmailMobile">Email address</label>
+                                <input type="email" class="form-control"
+                                    id="registerEmailMobile" placeholder="Enter email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registerPasswordMobile">Password</label>
+                                <input type="password" class="form-control"
+                                    id="registerPasswordMobile" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registerConfirmPasswordMobile">Confirm Password</label>
+                                <input type="password" class="form-control"
+                                    id="registerConfirmPasswordMobile" placeholder="Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="registerMobile">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!------ Include the above in your HEAD tag ---------->
 
-<div class="login-reg-panel">
-		<div class="login-info-box">
-			<h2>Have an account?</h2>   
-			<label id="label-register" for="log-reg-show">Login</label>
-			<input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
-		</div>
-							
-		<div class="register-info-box">
-			<h2>Don't have an account?</h2>
-			<label id="label-login" for="log-login-show">Register</label>
-			<input type="radio" name="active-log-panel" id="log-login-show">
-		</div>
-							
-		<div class="white-panel">
-            <form>
-			<div class="login-show">
-				<h2>LOGIN</h2>
-				<input type="text" placeholder="Email" id="email" required>
-				<input type="password" placeholder="Password" id="password" required>
-                <!-- <a href="#" id="forgot-password">Forgot Password?</a> -->
-                <button id="login" class="btn btn-secondary align-right">Login</button>
-            <!-- <div id="forgot-password-modal" style="display: none;">
+        <div class="login-reg-panel  d-none d-sm-block">
+            <div class="login-info-box">
+                <h2>Have an account?</h2>
+                <label id="label-register" for="log-reg-show">Login</label>
+                <input type="radio" name="active-log-panel" id="log-reg-show"
+                    checked="checked">
+            </div>
+
+            <div class="register-info-box">
+                <h2>Don't have an account?</h2>
+                <label id="label-login" for="log-login-show">Register</label>
+                <input type="radio" name="active-log-panel" id="log-login-show">
+            </div>
+
+            <div class="white-panel">
+                <form>
+                    <div class="login-show">
+                        <h2>LOGIN</h2>
+                        <input type="text" placeholder="Email" id="email"
+                            required>
+                        <input type="password" placeholder="Password"
+                            id="password" required>
+                        <!-- <a href="#" id="forgot-password">Forgot Password?</a> -->
+                        <button id="login" class="btn btn-secondary align-right">Login</button>
+                        <!-- <div id="forgot-password-modal" style="display: none;">
                 <h2>Reset Password</h2>
                 <input type="text" placeholder="Email">
                 <button id="resetPassword" class="btn btn-secondary align-right">Send Reset Link</button>
                 <a href="#" id="close-modal">Close</a>
             </div>  -->
-			</div>
-            
-            <div class="register-show">
-                <h2>REGISTER</h2>
-                <input type="text" id="fullName" placeholder="Full Name" required>
-                <input type="date" id="birthday" placeholder="Birthday" required>
-                <input type="text" id="address" placeholder="Address" required>
-                <input type="text" id="phoneNumber" placeholder="Phone Number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="11" required/>
-                <input type="text" id="registerEmail" placeholder="Email" required>
-                <input type="password" id="registerPassword" placeholder="Password" required>
-                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-                <button id="register" class="btn btn-secondary align-right">Register</button>
+                    </div>
+
+                    <div class="register-show">
+                        <h2>REGISTER</h2>
+                        <input type="text" id="fullName" placeholder="Full Name"
+                            required>
+                        <input type="date" id="birthday" placeholder="Birthday"
+                            required>
+                        <input type="text" id="address" placeholder="Address"
+                            required>
+                        <input type="text" id="phoneNumber"
+                            placeholder="Phone Number"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                            maxlength="11" required />
+                        <input type="text" id="registerEmail"
+                            placeholder="Email" required>
+                        <input type="password" id="registerPassword"
+                            placeholder="Password" required>
+                        <input type="password" id="confirmPassword"
+                            placeholder="Confirm Password" required>
+                        <button id="register"
+                            class="btn btn-secondary align-right">Register</button>
+                    </div>
+                </form>
             </div>
-            </form>
-		</div>
-	</div>
+        </div>
 
-    </div>
-        
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js" integrity="sha512-oVbWSv2O4y1UzvExJMHaHcaib4wsBMS5tEP3/YkMP6GmkwRJAa79Jwsv+Y/w7w2Vb/98/Xhvck10LyJweB8Jsw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/form.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
+            integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+        <script
+            src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js"
+            integrity="sha512-oVbWSv2O4y1UzvExJMHaHcaib4wsBMS5tEP3/YkMP6GmkwRJAa79Jwsv+Y/w7w2Vb/98/Xhvck10LyJweB8Jsw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/form.js"></script>
 
-    
-    <script>
+        <script>
         
         
     $(document).ready(function(){
@@ -83,7 +172,8 @@
             window.location.replace("index.html");
         }
 
-        flatpickr("#birthday");
+        // flatpickr("#birthdayMobile");
+        flatpickr("#birthday, #birthdayMobile");
 
     $('.login-info-box').fadeOut();
     $('.login-show').addClass('show-log-panel');
@@ -128,7 +218,7 @@
 
 
 </script>
-<script>
+        <script>
     $(function(){
       $.get("navbar.html", function(data) {
         $("body").prepend(data); // Append content.html data into the #container div
@@ -137,6 +227,6 @@
     
   
   </script>
-</body>
+    </body>
 
 </html>
