@@ -692,13 +692,19 @@ input:valid {
         let materialsRows = `<tr><td colspan="2" >Wall Material: ${selectedWall}</td>
                     <td>${selectedWallPrice}</td></tr>`;
 
+        quotationTotal += selectedWallPrice;
+
         materialsRows += `<tr><td colspan="2" >Wall Floor: ${selectedFloor}</td>
                     <td>${selectedFloorPrice}</td></tr>`;
+
+                    quotationTotal += selectedFloorPrice;
         materialsRows += `<tr><td colspan="2" >Wall Ceiling: ${selectedCeiling}</td>
                     <td>${selectedCeilingPrice}</td></tr>`;
+
+                    quotationTotal += selectedCeilingPrice;
           
         let materials = `<tr id="plumbingExcess" class="table-secondary">
-                  <td colspan="3"><h4 class="text-center">Plumbing (Every fixture in excess of one unit)</h4></td>
+                  <td colspan="3"><h4 class="text-center">Materials</h4></td>
                 </tr>` + materialsRows;
         $('tbody').find('tr:last').after(materials);
 
