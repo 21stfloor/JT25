@@ -162,9 +162,6 @@ a{
 .align-right {
     float: right;
 }
-#quotationLink {
-    display: none;
-  }
 #signIn {
     display: block;
   }

@@ -18,17 +18,11 @@ firebase.auth().onAuthStateChanged(
     (User)=> {
         currentUser = User;
         if (currentUser) {
-            quotationLink.style.display = 'block';
             signIn.style.display = 'none';
             signOutLink.style.display = 'block';
     
             if (window.location.pathname.endsWith('loginSignUp.html')) {
                 window.location.replace('index.html'); // Change to your login/sign-up page URL
-            }
-        } else {
-    
-            if (window.location.pathname.endsWith('Quotation.html')) {
-                window.location.replace('loginSignUp.html'); // Change to your login/sign-up page URL
             }
         }
     }
