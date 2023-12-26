@@ -32,7 +32,7 @@ input:valid {
     <div class="container">
       <div class="row justify-content-center">
         <div class="col p-2">
-          <h1 style="font-size:3vw">Average Cost of Construction</h1>
+          <h1>Quotation Form</h1>
         </div>
       </div>
       <form id="form" class="row g-3 needs-validation" novalidate>
@@ -87,10 +87,12 @@ input:valid {
 
             <button
               type="submit"
-              class="btn btn-primary next-button">Submit</button>
+              class="btn btn-primary next-button">Next</button>
 
           </div>
         </div>
+
+        
       </form>
     </div>
 
@@ -119,16 +121,14 @@ input:valid {
       src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
       integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script
-      src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+
     <script
-      src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-    <script
-      src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script> -->
+      src="https://www.paypal.com/sdk/js?client-id=ATeqISSROuuS7bK3tVPiIcdhxAy3WZclv5tvPXCVinjR0hSgh95NYjC5Zrn5aMlRVgF3OkRxmZTx43Mw&components=buttons&currency=PHP"></script>
+
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, addDoc, collection } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, addDoc, collection, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
       
@@ -151,6 +151,8 @@ input:valid {
         var currentPage = 0;
         var pages = $('.page');
         var maxPage = pages.length;
+        var totalPrice = 1000000;
+        var downpayment = 0;
         const totalLotArea = $('#totalLotArea');
         const totalFloorArea = $('#totalFloorArea');
         const numberOfFloors = $('#numberOfFloors');
@@ -160,7 +162,7 @@ input:valid {
         const form = document.querySelector('.needs-validation');
         form.addEventListener('submit', async (event) => {
           event.preventDefault(); // Prevent default form submission
-
+          
           // Validate form fields
           if (form.checkValidity() === false) {
             event.stopPropagation();
@@ -174,21 +176,110 @@ input:valid {
             return;
           }
 
-          // Collect form data
-          const propertyData = {
-            totalLotArea: parseInt(document.getElementById('totalLotArea').value),
-            totalFloorArea: parseInt(document.getElementById('totalFloorArea').value),
-            numberOfFloors: parseInt(document.getElementById('numberOfFloors').value),
-            numberOfBathrooms: parseInt(document.getElementById('numberOfBathrooms').value),
-            numberOfRooms: parseInt(document.getElementById('numberOfRooms').value),
-          };
+          downpayment = (totalPrice / 100) * 25;
 
-          // Add Firestore validation here
-          // ... (see next step)
+          $(pages[currentPage]).hide();
 
-          // Add a new document with a generated id.
-          const docRef = await addDoc(collection(db, "properties"), propertyData);
-          console.log("Document written with ID: ", docRef.id);
+          
+
+                                
+
+          if ($('#paypal-button-container').length == 0){
+            $(`#form`).append(`<div id="paypal-button-container" style="max-width:1000px;"><h1>Total Price: ${formatCurrency(totalPrice)}</h1><br><h3>25% Downpayment: ${formatCurrency(downpayment)}</h3></div>`);
+            paypal.Buttons({
+              style: {
+                disableMaxWidth: true
+              },
+              createOrder: function(data, actions) {
+              return actions.order.create({
+                  purchase_units: [{
+                      description: `This is your 25% downpayment of the total cost of ${formatCurrency(totalPrice)}`,
+                      amount: {
+                          value: downpayment,
+                      }
+                  }]
+              });
+          },
+              async onApprove(orderData) {
+                console.log(orderData);
+
+                var dialog = bootbox.dialog({
+                                message: '<p class="text-center mb-0"><i class="fas fa-spin fa-cog"></i> Processing your order...</p>',
+                                closeButton: false
+                                });
+
+                $('#paypal-button-container').hide();
+
+                $.ajax({
+                  url: `https://jlt25-1b1f25d12d7f.herokuapp.com/paypal/capture/${orderData.orderID}`,
+                  type: 'POST',
+                  dataType: 'json',
+                  contentType: 'application/json',
+                  success: async function(response) {
+                    console.log('Response:', response);
+                    const propertyData = {
+                      orderId: orderData.orderID,
+                      email: response.payer.email_address,
+                      totalLotArea: parseInt(document.getElementById('totalLotArea').value),
+                      totalFloorArea: parseInt(document.getElementById('totalFloorArea').value),
+                      numberOfFloors: parseInt(document.getElementById('numberOfFloors').value),
+                      numberOfBathrooms: parseInt(document.getElementById('numberOfBathrooms').value),
+                      numberOfRooms: parseInt(document.getElementById('numberOfRooms').value),
+                      totalPrice: totalPrice,
+                      downpayment: downpayment,
+                      timestamp: serverTimestamp()
+                    };
+
+                    // Add Firestore validation here
+                    // ... (see next step)
+
+
+                    try{
+                      // Add a new document with a generated id.
+                      const createdDocument = await addDoc(collection(db, "quotations"), propertyData);
+                      console.log(createdDocument);
+                      // const docRef = doc(db, 'quotations', createdDocument.id);
+
+                      // // Update the timestamp field with the value from the server
+                      // const updateTimestamp = await updateDoc(docRef, {
+                      //     timestamp: serverTimestamp()
+                      // });
+                    }
+                    catch(error){
+                      bootbox.alert(error);
+                    }
+
+                    dialog.modal('hide');
+                    // Handle the response data here
+                  },
+                  error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    dialog.modal('hide');
+                    bootbox.alert(error);
+                    
+                    // Handle errors here
+                  }
+                });
+
+
+                
+                // console.log("Document written with ID: ", createdDocument.id);
+              },
+              onCancel(data) {
+                // Show a cancel page, or return to cart
+              },
+              onError(err) {
+                // For example, redirect to a specific error page
+                bootbox.alert(err);
+              }
+            }).render('#paypal-button-container');
+
+            
+          
+          }
+          else{
+            $('#paypal-button-container').show();
+          }
         });
 
 
@@ -197,6 +288,13 @@ input:valid {
             return `Total Lot Area must be larger than floor area!`;
           }
           return '';
+        }
+
+        function formatCurrency(number, currencyCode = 'PHP') {
+          return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currencyCode
+          }).format(number);
         }
     </script>
     <script>
