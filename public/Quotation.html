@@ -35,19 +35,77 @@ input:valid {
           <h1>Quotation Form</h1>
         </div>
       </div>
-      <form id="form" class="row g-3 needs-validation" novalidate>
-        <div class="page row">
+      <form id="form" class="row g-3 needs-validation bg-primary-subtle" novalidate>
+        <div class="page1 row">
+          <div class="col-md-4 p-2">
+
+            <div class="input-group w-100">
+
+              <div class="card w-100">
+                <img src="UnfinishedHousing.jpg" class="card-img-top"
+                  alt="Unfinished Housing">
+                <div class="card-body">
+
+                  <p class="card-text">Bare Housing</p>
+                  <p class="card-text">22,000 php/sqm</p>
+                  <input class="btn-check" type="radio" name="houseType"
+                    id="houseType1"
+                    checked data-price="22000">
+                  <label class="btn btn-outline-success"
+                    for="houseType1">Select</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 p-2">
+            <div class="input-group w-100">
+
+              <div class="card w-100">
+                <img src="standardhousing.jpg" class="card-img-top"
+                  alt="Standard Housing">
+                <div class="card-body">
+                  <p class="card-text">Standard Housing</p>
+                  <p class="card-text">35,000 php/sqm</p>
+                  <input class="btn-check" type="radio" name="houseType"
+                    id="houseType2" data-price="35000">
+                  <label class="btn btn-outline-success"
+                    for="houseType2">Select</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 p-2">
+            <div class="input-group w-100">
+
+              <div class="card w-100">
+                <img src="Highendhouse.jpg" class="card-img-top"
+                  alt="High-End Housing">
+                <div class="card-body">
+                  <p class="card-text">High-End Housing</p>
+                  <p class="card-text">45,000 php/sqm</p>
+                  <input class="btn-check" type="radio" name="houseType"
+                    id="houseType3" data-price="45000">
+                  <label class="btn btn-outline-success"
+                    for="houseType3">Select</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page1 row">
           <div class="col-md-6">
             <label for="totalLotArea" class="form-label">Total Lot Area
               (sq.m.)</label>
-            <input type="number" class="form-control" id="totalLotArea"
+            <input type="number" class="form-control propertyField"
+              id="totalLotArea"
               name="totalLotArea" min="1" required>
             <div class="invalid-feedback">Please enter the total lot area.</div>
           </div>
           <div class="col-md-6">
             <label for="totalFloorArea" class="form-label">Total Floor Area
               (sq.m.)</label>
-            <input type="number" class="form-control" id="totalFloorArea"
+            <input type="number" class="form-control propertyField"
+              id="totalFloorArea"
               name="totalFloorArea" min="1" required>
             <div class="invalid-feedback">Please enter the total floor
               area.</div>
@@ -55,31 +113,24 @@ input:valid {
           <div class="col-md-6">
             <label for="numberOfFloors" class="form-label">Number of
               Floors</label>
-            <input type="number" class="form-control" id="numberOfFloors"
+            <input type="number" class="form-control propertyField"
+              id="numberOfFloors"
               name="numberOfFloors" min="1" required>
             <div class="invalid-feedback">Please enter the number of
               floors.</div>
           </div>
-          <div class="col-md-6">
-            <label for="numberOfBathrooms" class="form-label">Number of
-              Bathrooms</label>
-            <input type="number" class="form-control" id="numberOfBathrooms"
-              name="numberOfBathrooms" min="1" required>
-            <div class="invalid-feedback">Please enter the number of
-              bathrooms.</div>
-          </div>
-          <div class="col-md-6">
-            <label
-              for="numberOfRooms"
-              class="form-label">Number of Rooms</label>
+          
 
-            <input
-              type="number"
-              class="form-control"
-              id="numberOfRooms"
-              name="numberOfRooms" min="1" required>
-            <div class="invalid-feedback">Please enter the number of
-              rooms.</div>
+          <div class="mb-3">
+            <label for="pricePerSqm" class="form-label">Price per sqm
+              (PHP):</label>
+            <input type="number" class="form-control" id="pricePerSqm"
+              value="22000"
+              step="0.01" readonly data-required>
+          </div>
+
+          <div class="floors">
+
           </div>
 
           <div
@@ -87,13 +138,43 @@ input:valid {
 
             <button
               type="submit"
-              class="btn btn-primary next-button">Next</button>
+              class="btn btn-primary next-button" disabled>Next</button>
 
           </div>
+
         </div>
 
-        
       </form>
+
+      <div class="row summary" style="display: none;">
+        <div id="summary-table"
+          class="col-md-6 col-12 offset-md-3 bg-primary-subtle rounded p-3">
+          <h1>Summary</h1>
+          <div class="summary-text">
+            <h3 id="totalFloorAreaSummary">Total Floor Area: </h3>
+            <h3 id="totalAreaSqmSummary">Total Area: </h3>
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Fee</th>
+                  <th scope="col">Total Fee</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                <tr id="floorCountSummaryRow">
+                  <td>No. of Floor(s)</td>
+                  <td id="floorCountSummary">1</td>
+                  <td id="floorCountPrice">0</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
     </div>
 
     <footer class="footer">
@@ -124,11 +205,29 @@ input:valid {
 
     <script
       src="https://www.paypal.com/sdk/js?client-id=ATeqISSROuuS7bK3tVPiIcdhxAy3WZclv5tvPXCVinjR0hSgh95NYjC5Zrn5aMlRVgF3OkRxmZTx43Mw&components=buttons&currency=PHP"></script>
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, addDoc, collection, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, addDoc, collection, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const fetchData = async (url) => {
+          try {
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error('Network response was not ok.');
+            }
+            const data = await response.json();
+            return data;
+          } catch (error) {
+            // Handle errors
+            console.error('Error fetching data:', error);
+            throw error;
+          }
+        };
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
       
@@ -147,17 +246,57 @@ input:valid {
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const auth = getAuth();
 
-        var currentPage = 0;
-        var pages = $('.page');
-        var maxPage = pages.length;
-        var totalPrice = 1000000;
+        var totalPrice = 0;
         var downpayment = 0;
         const totalLotArea = $('#totalLotArea');
         const totalFloorArea = $('#totalFloorArea');
         const numberOfFloors = $('#numberOfFloors');
-        const numberOfBathrooms = $('#numberOfBathrooms');
         const numberOfRooms = $('#numberOfRooms');
+        const pricePerSqmInput = document.getElementById("pricePerSqm");
+
+        const costs = {
+          electricity: 0,
+          bedroom: 0,
+          kitchen: 0,
+          barehouse: 0,
+          highend: 0,
+          publicBathroom: 0
+        }
+
+        $(document).ready(async ()=>{
+          let dialog = bootbox.dialog({
+                        message: '<p class="text-center mb-0"><i class="fas fa-spin fa-cog"></i> Fetching data...</p>',
+                      closeButton: false
+                      });
+
+            try {
+              for (let key in costs) {
+                let data = await fetchData(`https://firestore.googleapis.com/v1/projects/jt25-fae27/databases/(default)/documents/summation/${key}`);
+                console.log(`${key} data: `, data);
+                costs[key] = parseInt(data.fields.total_price.integerValue);
+                console.log(`${key} cost = ${costs[key]}`);
+              }
+              
+              // Do something with the data here
+            } catch (error) {
+              // Handle errors here
+              console.error('Error in getting data:', error);
+              $('.next-button').remove();
+              bootbox.alert('An error occured, Please reload the page or Contact the administrator');
+            }
+            
+            dialog.modal('hide');
+            $('.next-button').removeAttr('disabled');
+        });
+
+        
+
+        $(`.back-button`).on('click', ()=>{
+          $(`#paypal-button-container`).hide();
+          $(`.page1`).show();
+        });
 
         const form = document.querySelector('.needs-validation');
         form.addEventListener('submit', async (event) => {
@@ -176,30 +315,32 @@ input:valid {
             return;
           }
 
+          if(totalPrice > 10000000){
+            bootbox.alert("Sorry, but we can't handle projects above 10 million");
+            $(`.next-button`).attr('disabled', true);
+            return;
+          }
+
           downpayment = (totalPrice / 100) * 25;
 
-          $(pages[currentPage]).hide();
-
-          
-
-                                
+          $(`.page1`).hide();           
 
           if ($('#paypal-button-container').length == 0){
-            $(`#form`).append(`<div id="paypal-button-container" style="max-width:1000px;"><h1>Total Price: ${formatCurrency(totalPrice)}</h1><br><h3>25% Downpayment: ${formatCurrency(downpayment)}</h3></div>`);
+            $(`#form`).append(`<div id="paypal-button-container" style="max-width:1000px;"><h1 id="totalPriceSummary">Total Price: ${formatCurrency(totalPrice)}</h1><br><h3 id="downpaymentSummary">25% Downpayment: ${formatCurrency(downpayment)}</h3></div>`);
             paypal.Buttons({
-              style: {
-                disableMaxWidth: true
-              },
-              createOrder: function(data, actions) {
-              return actions.order.create({
-                  purchase_units: [{
-                      description: `This is your 25% downpayment of the total cost of ${formatCurrency(totalPrice)}`,
-                      amount: {
-                          value: downpayment,
-                      }
-                  }]
-              });
-          },
+                style: {
+                  disableMaxWidth: true
+                },
+                createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        description: `This is your 25% downpayment of the total cost of ${formatCurrency(totalPrice)}`,
+                        amount: {
+                            value: downpayment,
+                        }
+                    }]
+                });
+            },
               async onApprove(orderData) {
                 console.log(orderData);
 
@@ -217,9 +358,15 @@ input:valid {
                   contentType: 'application/json',
                   success: async function(response) {
                     console.log('Response:', response);
+
+                    let user = auth.currentUser;
+                    let email = response.payer.email_address;
+                    if (user) {
+                      email = user.email;
+                    }
                     const propertyData = {
                       orderId: orderData.orderID,
-                      email: response.payer.email_address,
+                      email: email,
                       totalLotArea: parseInt(document.getElementById('totalLotArea').value),
                       totalFloorArea: parseInt(document.getElementById('totalFloorArea').value),
                       numberOfFloors: parseInt(document.getElementById('numberOfFloors').value),
@@ -230,24 +377,16 @@ input:valid {
                       timestamp: serverTimestamp()
                     };
 
-                    // Add Firestore validation here
-                    // ... (see next step)
-
-
                     try{
                       // Add a new document with a generated id.
                       const createdDocument = await addDoc(collection(db, "quotations"), propertyData);
                       console.log(createdDocument);
-                      // const docRef = doc(db, 'quotations', createdDocument.id);
 
-                      // // Update the timestamp field with the value from the server
-                      // const updateTimestamp = await updateDoc(docRef, {
-                      //     timestamp: serverTimestamp()
-                      // });
-                    }
-                    catch(error){
-                      bootbox.alert(error);
-                    }
+
+                      }
+                      catch(error){
+                        bootbox.alert(error);
+                      }
 
                     dialog.modal('hide');
                     // Handle the response data here
@@ -282,9 +421,25 @@ input:valid {
           }
         });
 
+        $('form').on('change', '.propertyField', ()=>{
+          calculateQuotation();
+          updateSummary();
+        });
+
+        $('#numberOfFloors').change(floorCountUpdated);
+        $('#numberOfFloors').on('input', floorCountUpdated);
+
+        $('input[name="houseType"]').click(function(){
+          var price = $(this).data('price');
+          $('#pricePerSqm').val(price);
+          console.log(price);
+          calculateQuotation();
+
+          updateSummary();
+        });
 
         function isFormValid(){
-          if(totalFloorArea.val() > totalLotArea.val()){
+          if(parseInt(totalFloorArea.val()) > parseInt(totalLotArea.val())){
             return `Total Lot Area must be larger than floor area!`;
           }
           return '';
@@ -296,6 +451,106 @@ input:valid {
             currency: currencyCode
           }).format(number);
         }
+
+        function generateRandomPassword(length=8) {
+          const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+          let password = '';
+          
+          for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset[randomIndex];
+          }
+          
+          return password;
+        }
+
+        function calculateQuotation() {
+            const pricePerSqm = parseFloat(pricePerSqmInput.value);
+            const floorCount = parseInt(numberOfFloors.value);
+            const bedRoomCount = parseInt(numberOfRooms.value)
+
+            if (isNaN(pricePerSqm)) {
+              return;
+            }
+            const sqm = totalFloorArea.val();
+            totalPrice = (sqm * pricePerSqm) * floorCount;
+
+            let bedroomFees = costs.bedroom;
+
+            bedroomFees *= bedRoomCount;
+
+            totalPrice += bedroomFees;
+            downpayment = (totalPrice / 100) * 25;
+            
+            if(totalPrice > 10000000){
+              bootbox.alert("Sorry, but we can't handle projects above 10 million");
+              $(`.next-button`).attr('disabled', true);
+              return;
+            }
+        }
+
+      function updateSummary(){
+        console.log(`updating summary`);
+        let summary = $('.summary-text');        
+        $('#totalFloorAreaSummary').text(`Total Floor Area: ${totalFloorArea.val()}`);
+        $('#totalLotAreaSummary').text(`Total Lot Area: ${totalLotArea.val()}`);
+
+        let floorCount = parseInt(numberOfFloors.val());
+        $(`#floorCountSummary`).text(`x${floorCount}`);
+        $(`#totalPriceSummary`).text(`Total Price:${formatCurrency(totalPrice)}`);
+        $(`#downpaymentSummary`).text(`25% Downpayment: ${formatCurrency(downpayment)}`);
+      }
+
+      function floorCountUpdated(){
+        // Your function or action when the input value changes
+        var floorCount = parseInt($(this).val());
+
+        if(floorCount <= 0){
+          return;
+        }
+        
+        console.log(floorCount);
+        $(".floors").empty();
+
+        for(var i = 0; i < floorCount; i++){
+
+          let floorTemplate = `
+            <div class="row page1 floor-config">
+                <div class="col-md-4 col-12 offset-md-4  bg-primary-subtle rounded p-3">
+                    <h3>${getOrdinal(i + 1)} Floor</h3>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input restRoomToogle" type="checkbox" role="switch" id="floorRestroom${i}">
+                            <label class="form-check-label" for="floorRestroom${i}">Does it have a restroom?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="numberOfRooms"
+                        class="form-label">Number of Bedrooms</label>
+
+                      <input
+                        type="number"
+                        class="form-control propertyField bedrooms"
+                        id="numberOfRooms"
+                        name="numberOfRooms" min="1" required>
+                      <div class="invalid-feedback">Please enter the number of
+                        bedrooms.</div>
+                    </div>
+                </div>
+            </div>`;
+
+          $(".floors").append(floorTemplate);
+        }
+      }
+
+
+        function getOrdinal(n) {
+          const suffixes = ["st", "nd", "rd"];
+          const suffix = n % 10 < 4 && Math.floor(n / 10) !== 1 ? suffixes[n % 10 - 1] : "th";
+          return n + suffix;
+        }
+        
     </script>
     <script>
       
