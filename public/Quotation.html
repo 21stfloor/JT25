@@ -35,7 +35,8 @@ input:valid {
           <h1>Quotation Form</h1>
         </div>
       </div>
-      <form id="form" class="row g-3 needs-validation bg-primary-subtle" novalidate>
+      <form id="form" class="row g-3 needs-validation bg-primary-subtle"
+        novalidate>
         <div class="page1 row">
           <div class="col-md-4 p-2">
 
@@ -119,7 +120,6 @@ input:valid {
             <div class="invalid-feedback">Please enter the number of
               floors.</div>
           </div>
-          
 
           <div class="mb-3">
             <label for="pricePerSqm" class="form-label">Price per sqm
@@ -254,7 +254,10 @@ input:valid {
         const totalFloorArea = $('#totalFloorArea');
         const numberOfFloors = $('#numberOfFloors');
         const numberOfRooms = $('#numberOfRooms');
-        const pricePerSqmInput = document.getElementById("pricePerSqm");
+        const pricePerSqmInput = $("#pricePerSqm");
+        var highEndSelected = false;
+        var bedRoomCount = 0;
+        var bathroomCount = 0;
 
         const costs = {
           electricity: 0,
@@ -275,7 +278,13 @@ input:valid {
               for (let key in costs) {
                 let data = await fetchData(`https://firestore.googleapis.com/v1/projects/jt25-fae27/databases/(default)/documents/summation/${key}`);
                 console.log(`${key} data: `, data);
-                costs[key] = parseInt(data.fields.total_price.integerValue);
+                
+                if (data.fields.hasOwnProperty('perFloor') && data.fields.perFloor.booleanValue) {
+                  costs[`${key}PerFloor`] = parseInt(data.fields.totalPrice.integerValue);
+                }
+                else{
+                  costs[key] = parseInt(data.fields.total_price.integerValue);
+                }
                 console.log(`${key} cost = ${costs[key]}`);
               }
               
@@ -326,7 +335,7 @@ input:valid {
           $(`.page1`).hide();           
 
           if ($('#paypal-button-container').length == 0){
-            $(`#form`).append(`<div id="paypal-button-container" style="max-width:1000px;"><h1 id="totalPriceSummary">Total Price: ${formatCurrency(totalPrice)}</h1><br><h3 id="downpaymentSummary">25% Downpayment: ${formatCurrency(downpayment)}</h3></div>`);
+            $(`#form`).append(`<div id="paypal-button-container" class="text-center"><h1 id="totalPriceSummary">Total Price: ${formatCurrency(totalPrice)}</h1><br><h3 id="downpaymentSummary">25% Downpayment: ${formatCurrency(downpayment)}</h3></div>`);
             paypal.Buttons({
                 style: {
                   disableMaxWidth: true
@@ -370,8 +379,8 @@ input:valid {
                       totalLotArea: parseInt(document.getElementById('totalLotArea').value),
                       totalFloorArea: parseInt(document.getElementById('totalFloorArea').value),
                       numberOfFloors: parseInt(document.getElementById('numberOfFloors').value),
-                      numberOfBathrooms: parseInt(document.getElementById('numberOfBathrooms').value),
-                      numberOfRooms: parseInt(document.getElementById('numberOfRooms').value),
+                      numberOfBathrooms: bathroomCount,
+                      numberOfRooms: bedRoomCount,
                       totalPrice: totalPrice,
                       downpayment: downpayment,
                       timestamp: serverTimestamp()
@@ -382,10 +391,58 @@ input:valid {
                       const createdDocument = await addDoc(collection(db, "quotations"), propertyData);
                       console.log(createdDocument);
 
+                      if (user == null) {
+                        var password = generateRandomPassword();
+                        createUserWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                          // Signed up 
+                          const user = userCredential.user;
+                          const subject = "JLT Default Account Password";
+                          const message = `Welcome to JLT Architecture Design, <br> This is your default account password : ${password}, you can use it to login to your account using this email: ${email}`;
+                          let emailUrl = "https://jlt25-1b1f25d12d7f.herokuapp.com/send-email";
+                          if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                              emailUrl = "http://127.0.0.1:8000/send-email";
+                          }
+                          // Send data via AJAX to Laravel endpoint
+                          $.ajax({
+                              url: emailUrl,
+                              method: 'POST',
+                              data: {
+                                  email: email,
+                                  subject: subject,
+                                  message: message
+                              },
+                              success: function(response) {
+                                  console.log(response);
+                                  $('.summary').show();
+                                  bootbox.alert('Please check you email for your default account password');                                  
+                                  // $('.save-quote').removeAttr('disabled');
+                              },
+                              error: function(xhr, status, error) {
+                                  console.error(error);
+                                  bootbox.alert('Failed to send email.');
+                                  // $('.save-quote').removeAttr('disabled');
+                              }
+                          });
+                          // ...
+                        })
+                        .catch((error) => {
+                          const errorCode = error.code;
+                          const errorMessage = error.message;
+                          // ..
+                          console.log(errorMessage);
+                          $('.summary').show();
+                        });
+                      }
+                      else{
+                        $('.summary').show();
+                      }
 
                       }
                       catch(error){
+                        console.log(error);
                         bootbox.alert(error);
+                        $('.summary').show();
                       }
 
                     dialog.modal('hide');
@@ -421,10 +478,11 @@ input:valid {
           }
         });
 
-        $('form').on('change', '.propertyField', ()=>{
+        $('form').on('change', '.propertyField, .restRoomToogle', ()=>{
           calculateQuotation();
           updateSummary();
         });
+
 
         $('#numberOfFloors').change(floorCountUpdated);
         $('#numberOfFloors').on('input', floorCountUpdated);
@@ -433,6 +491,9 @@ input:valid {
           var price = $(this).data('price');
           $('#pricePerSqm').val(price);
           console.log(price);
+
+          highEndSelected = ($(this).attr('id') == 'houseType3');
+          
           calculateQuotation();
 
           updateSummary();
@@ -465,23 +526,48 @@ input:valid {
         }
 
         function calculateQuotation() {
-            const pricePerSqm = parseFloat(pricePerSqmInput.value);
-            const floorCount = parseInt(numberOfFloors.value);
-            const bedRoomCount = parseInt(numberOfRooms.value)
+            const pricePerSqm = parseFloat(pricePerSqmInput.val());
+            const floorCount = parseInt(numberOfFloors.val());
+            
 
             if (isNaN(pricePerSqm)) {
               return;
             }
-            const sqm = totalFloorArea.val();
+            const sqm = parseFloat(totalFloorArea.val());
             totalPrice = (sqm * pricePerSqm) * floorCount;
 
+            bedRoomCount = 0;
+            $('.bedrooms').each(function(index, element){
+              let count = parseInt($(this).val());
+              if(!isNaN(count)){
+                bedRoomCount += count;
+              }
+            });
+            console.log(`bedroom count is :${bedRoomCount}`);
             let bedroomFees = costs.bedroom;
 
             bedroomFees *= bedRoomCount;
-
+            
             totalPrice += bedroomFees;
+
+            bathroomCount = parseInt($('.restRoomToogle:checked').length);;
+            console.log(`bathroom count is :${bathroomCount}`);
+            let bathroomFees = costs.barehouse;
+
+            bathroomFees *= bathroomCount;
+
+            totalPrice += bathroomFees;
+
+            totalPrice += costs.electricity;
+            totalPrice += costs.kitchen;
+
+            if(highEndSelected){
+              totalPrice += costs.highend;
+            }
+            
             downpayment = (totalPrice / 100) * 25;
             
+            console.log(`totalPrice is : ${totalPrice}`);
             if(totalPrice > 10000000){
               bootbox.alert("Sorry, but we can't handle projects above 10 million");
               $(`.next-button`).attr('disabled', true);
@@ -520,7 +606,7 @@ input:valid {
                     <h3>${getOrdinal(i + 1)} Floor</h3>
                     <div class="mb-3">
                         <div class="form-check form-switch">
-                            <input class="form-check-input restRoomToogle" type="checkbox" role="switch" id="floorRestroom${i}">
+                            <input class="form-check-input restRoomToogle" type="checkbox" role="switch" id="floorRestroom${i}" title="If checked, the price will be multiplied by number of floors">
                             <label class="form-check-label" for="floorRestroom${i}">Does it have a restroom?</label>
                         </div>
                     </div>
@@ -533,7 +619,7 @@ input:valid {
                         type="number"
                         class="form-control propertyField bedrooms"
                         id="numberOfRooms"
-                        name="numberOfRooms" min="1" required>
+                        name="numberOfRooms" min="0" required>
                       <div class="invalid-feedback">Please enter the number of
                         bedrooms.</div>
                     </div>
