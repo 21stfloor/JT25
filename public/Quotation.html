@@ -146,34 +146,110 @@ input:valid {
 
       </form>
 
-      <div class="row summary" style="display: none;">
+      <div class="row summary bg-primary-subtle p-1" id="summmaryReceipt" style="display: none;">
         <div id="summary-table"
-          class="col-md-6 col-12 offset-md-3 bg-primary-subtle rounded p-3">
-          <h1>Summary</h1>
-          <div class="summary-text">
-            <h3 id="totalFloorAreaSummary">Total Floor Area: </h3>
-            <h3 id="totalAreaSqmSummary">Total Area: </h3>
-
-            <table class="table table-hover">
+          class="col-md-10 col-12 offset-md-1 rounded p-5 bg-white shadow-lg">
+          
+          <div class="row" id="receiptTable">
+            <table class="table table-hover caption-top">
+              <caption><div class="row border border-5 border-secondary-subtle border-start-0 border-top-0 border-end-0 ">
+                <div class="col-8">
+                  <h1>JLT25 Architechtural Design Quotation</h1>
+                </div>
+                <div class="col">
+                  <img src="logoTemplate.jpg" width="128" height="64"
+                    alt="Company Logo" class="logo float-end">
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="mb-3 col-auto">
+                  <label for="quotationId" class="form-label fw-bold">Quotation
+                    #</label>
+                  <input type="text" class="form-control-plaintext" id="quotationId"
+                    readonly>
+                </div>
+                <div class="mb-3 col-6">
+                </div>
+                <div class="mb-3 col-auto">
+                  <label for="quotationDate" class="form-label fw-bold">Date</label>
+                  <input type="text" class="form-control-plaintext"
+                    id="quotationDate" readonly>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <label for="totalFloorAreaSummary" class="form-label fw-bold">Total Floor Area:<label>
+                  <input type="text" class="form-control-plaintext" id="totalFloorAreaSummary"
+                    readonly>
+                </div>
+                <div class="col-12">
+                  <label for="totalAreaSqmSummary" class="form-label fw-bold">Total Area: <label>
+                  <input type="text" class="form-control-plaintext" id="totalAreaSqmSummary"
+                    readonly>
+                </div>
+    
+              </div></caption>
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Fee</th>
-                  <th scope="col">Total Fee</th>
+                  <th scope="col" class="bg-success text-white ">Details</th>
+                  <th scope="col" class="bg-success text-white ">#</th>
+                  <th scope="col" class="bg-success text-white text-center">Total</th>
                 </tr>
               </thead>
               <tbody id="tbody">
                 <tr id="floorCountSummaryRow">
-                  <td>No. of Floor(s)</td>
+                  <td class="fw-bold">No. of Floor(s)</td>
                   <td id="floorCountSummary">1</td>
-                  <td id="floorCountPrice">0</td>
+                  <td id="floorCountPrice" class="text-center">0</td>
+                </tr>
+
+                <tr id="bedroomCountSummaryRow">
+                  <td class="fw-bold">No. of Bedroom(s)</td>
+                  <td id="bedroomCountSummary">1</td>
+                  <td id="bedroomPriceSummary" class="text-center">0</td>
+                </tr>
+
+                <tr id="bathroomCountSummaryRow">
+                  <td class="fw-bold">No. of Bathroom(s)</td>
+                  <td id="bathroomCountSummary">1</td>
+                  <td id="bathroomPriceSummary" class="text-center">0</td>
+                </tr>
+
+                <tr id="electricitySummaryRow">
+                  <td class="fw-bold" colspan="2">Electricity</td>                  
+                  <td id="electricityPriceSummary" class="text-center">0</td>
+                </tr>
+
+                <tr id="kitchenSummaryRow">
+                  <td class="fw-bold" colspan="2">Kitchen</td>                  
+                  <td id="kitchenPriceSummary" class="text-center">0</td>
+                </tr>
+
+                <tr id="highEndSummaryRow">
+                  <td class="fw-bold" colspan="2">High end</td>                  
+                  <td id="highendPriceSummary" class="text-center">0</td>
                 </tr>
 
               </tbody>
+
+              <tfoot class="border border-5 border-secondary-subtle border-start-0 border-bottom-0 border-end-0">
+                <tr>
+                  <td class="fw-bold" colspan="2">Downpayment</td>   
+                  <td class="text-center" id="downpaymentSummary">0</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold"></td>   
+                  <td class="fw-bold bg-success text-white">Total</td>                  
+                  <td class="text-center bg-success text-white fw-bold" id="totalPriceSummary">0</td>
+                </tr>
+              </tfoot>
             </table>
           </div>
 
         </div>
+      <div class="row">
+        <button id="downloadPDF" class="btn btn-primary">Download PDF</button>
+      </div>
       </div>
     </div>
 
@@ -208,11 +284,45 @@ input:valid {
     <script type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script> -->
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.js" integrity="sha512-oTV4NrGNoEpaF91/0i6IMXJYFfXhd6vXY9YQxEj/kPA2ra6p6ZykYfnfbvHGnGN4maXZCvhDJ3PerIFvMptckw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <!-- <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script> -->
+    <script>
+      window.jsPDF = window.jspdf.jsPDF;
+      $(document).ready(function(){
+        document.getElementById('downloadPDF').addEventListener('click', function() {
+          const table = document.getElementById('receiptTable');
+
+          html2canvas(table).then(canvas => {
+            const imgData = canvas.toDataURL('image/png'); // Convert canvas to base64 image data
+
+              const pdf = new jsPDF();
+              const imgWidth = 190; // Image width (adjustable)
+              const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+              const padding = 10; // Padding around the image
+
+              // Calculate positioning with padding
+              const x = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
+              const y = padding;
+
+              pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+            pdf.save('JLT25_Quotation_receipt.pdf');
+          });
+        });
+      });
+    </script>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, addDoc, collection, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
         import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // import * as jsPDF from 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
+        // import 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.mjs'
+        // applyPlugin(jsPDF)
 
         const fetchData = async (url) => {
           try {
@@ -258,6 +368,9 @@ input:valid {
         var highEndSelected = false;
         var bedRoomCount = 0;
         var bathroomCount = 0;
+        var quotationId = '';
+        var quotationDate = '';
+
 
         const costs = {
           electricity: 0,
@@ -298,6 +411,9 @@ input:valid {
             
             dialog.modal('hide');
             $('.next-button').removeAttr('disabled');
+
+
+            
         });
 
         
@@ -391,6 +507,11 @@ input:valid {
                       const createdDocument = await addDoc(collection(db, "quotations"), propertyData);
                       console.log(createdDocument);
 
+                      quotationId = orderData.orderID;
+                      quotationDate = new Date();
+
+                      calculateQuotation();
+
                       if (user == null) {
                         var password = generateRandomPassword();
                         createUserWithEmailAndPassword(auth, email, password)
@@ -431,6 +552,9 @@ input:valid {
                           const errorMessage = error.message;
                           // ..
                           console.log(errorMessage);
+                          if(errorMessage == "Firebase: Error (auth/email-already-in-use)."){
+                            bootbox.alert(`A new quotation was save using the account with the email: ${email}`);
+                          }
                           $('.summary').show();
                         });
                       }
@@ -480,7 +604,6 @@ input:valid {
 
         $('form').on('change', '.propertyField, .restRoomToogle', ()=>{
           calculateQuotation();
-          updateSummary();
         });
 
 
@@ -495,8 +618,6 @@ input:valid {
           highEndSelected = ($(this).attr('id') == 'houseType3');
           
           calculateQuotation();
-
-          updateSummary();
         });
 
         function isFormValid(){
@@ -533,6 +654,10 @@ input:valid {
             if (isNaN(pricePerSqm)) {
               return;
             }
+
+            $(`#floorCountSummary`).text(`x${floorCount}`);        
+            $(`#floorCountPrice`).text(`${formatCurrency(floorCount * pricePerSqm)}`);
+
             const sqm = parseFloat(totalFloorArea.val());
             totalPrice = (sqm * pricePerSqm) * floorCount;
 
@@ -547,6 +672,9 @@ input:valid {
             let bedroomFees = costs.bedroom;
 
             bedroomFees *= bedRoomCount;
+
+            $(`#bedroomCountSummary`).text(`x${bedRoomCount}`);        
+            $(`#bedroomPriceSummary`).text(`${formatCurrency(bedroomFees)}`);
             
             totalPrice += bedroomFees;
 
@@ -556,36 +684,49 @@ input:valid {
 
             bathroomFees *= bathroomCount;
 
+            $(`#bathroomCountSummary`).text(`x${bathroomCount}`);        
+            $(`#bathroomPriceSummary`).text(`${formatCurrency(bathroomFees)}`);
+
             totalPrice += bathroomFees;
 
             totalPrice += costs.electricity;
+            $(`#electricityPriceSummary`).text(`${formatCurrency(costs.electricity)}`);
+
             totalPrice += costs.kitchen;
+            $(`#kitchenPriceSummary`).text(`${formatCurrency(costs.kitchen)}`);
 
             if(highEndSelected){
               totalPrice += costs.highend;
+              $(`#highEndSummaryRow`).show();
+              $(`#highendPriceSummary`).text(`${formatCurrency(costs.highend)}`);
+            }
+            else{
+              $(`#highEndSummaryRow`).hide();
             }
             
             downpayment = (totalPrice / 100) * 25;
+
+            $(`#downpaymentSummary`).text(`${formatCurrency(downpayment)}`);
             
             console.log(`totalPrice is : ${totalPrice}`);
+            $(`#totalPriceSummary`).text(`${formatCurrency(totalPrice)}`);
+            
+            
+            $(`#quotationId`).val(quotationId);
+            $(`#quotationDate`).val(quotationDate);
+            $(`#totalFloorAreaSummary`).val(`${totalFloorArea.val()} sqm`);
+            $(`#totalAreaSqmSummary`).val(`${totalLotArea.val()} sqm`);
+            
+
             if(totalPrice > 10000000){
               bootbox.alert("Sorry, but we can't handle projects above 10 million");
               $(`.next-button`).attr('disabled', true);
               return;
             }
+            else{
+              $(`.next-button`).removeAttr('disabled');
+            }
         }
-
-      function updateSummary(){
-        console.log(`updating summary`);
-        let summary = $('.summary-text');        
-        $('#totalFloorAreaSummary').text(`Total Floor Area: ${totalFloorArea.val()}`);
-        $('#totalLotAreaSummary').text(`Total Lot Area: ${totalLotArea.val()}`);
-
-        let floorCount = parseInt(numberOfFloors.val());
-        $(`#floorCountSummary`).text(`x${floorCount}`);
-        $(`#totalPriceSummary`).text(`Total Price:${formatCurrency(totalPrice)}`);
-        $(`#downpaymentSummary`).text(`25% Downpayment: ${formatCurrency(downpayment)}`);
-      }
 
       function floorCountUpdated(){
         // Your function or action when the input value changes
