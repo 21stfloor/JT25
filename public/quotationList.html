@@ -314,8 +314,8 @@ input:valid {
         // Update specific fields with the data from searchResult
         document.getElementById('quotationId').value = fields.orderId.stringValue;
         document.getElementById('quotationDate').value = new Date(fields.timestamp.timestampValue).toLocaleDateString();
-        document.getElementById('totalFloorAreaSummary').value = fields.totalFloorArea.integerValue;
-        document.getElementById('totalAreaSqmSummary').value = fields.totalLotArea.integerValue;
+        document.getElementById('totalFloorAreaSummary').value = `${fields.totalFloorArea.integerValue} sqm`;
+        document.getElementById('totalAreaSqmSummary').value = `${fields.totalLotArea.integerValue} sqm`;
 
         // Update other fields
         document.getElementById('floorCountSummary').textContent = fields.numberOfFloors.integerValue;

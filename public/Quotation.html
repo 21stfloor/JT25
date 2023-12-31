@@ -454,7 +454,7 @@ input:valid {
 
           downpayment = (totalPrice / 100) * 25;
 
-          $(`.page1`).hide();           
+          $(`.page1`).hide();
 
           if ($('#paypal-button-container').length == 0){
             $(`#form`).append(`<div id="paypal-button-container" class="text-center"><h1 id="totalPriceSummary">Total Price: ${formatCurrency(totalPrice)}</h1><br><h3 id="downpaymentSummary">25% Downpayment: ${formatCurrency(downpayment)}</h3></div>`);

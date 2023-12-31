@@ -118,26 +118,29 @@ li:hover ul#submenu {
 .nav-item, .menu{
     font-family: 'Montserrat' !important; 
 }
-
+/* 
 .nav-item .nav-link, .menu{
     color: white;
 }
-
+*/
 .nav-item .nav-link:hover {
-    color: #0088a9;
-}
+    color: #df7015;
+    background-color: #6130e6;
+    border-radius: 0.375rem;
+} 
 
 .cta {
     padding: 9px 25px;
-    background-color: rgba(0, 136, 169, 1);
+    background-color: rgb(169, 0, 0);
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease 0s;
+    color: white;
   }
   
   .cta:hover {
-    background-color: rgba(0, 136, 169, 0.8);
+    background-color: rgba(255, 0, 0, 0.8);
   }
   
   /* Mobile Nav */
@@ -215,4 +218,8 @@ li:hover ul#submenu {
     height: auto; 
     margin-top: 10px; 
     float: right; 
+  }
+
+  body{
+    background-color: rgb(238, 238, 238) !important;
   }
