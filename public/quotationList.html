@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Quotations</title>
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+.card-img-top {
+	width: 100%;
+height: 25vh;
+					object-fit: cover;
+				}
+
+        input:invalid {
+    border: 1px solid red;
+}
+
+/* Style for valid inputs */
+input:valid {
+    border: 1px solid green;
+}
+</style>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet">
+    <link
+      href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"
+      rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col p-2">
+          <h1>My Quotations</h1>
+        </div>
+      </div>
+      <div class="row">
+        <table id="quotationTable" class="table table-striped"
+          style="width:100%">
+          <thead>
+            <tr>
+              <th>Quotation ID</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="row summary bg-primary-subtle p-1" id="summmaryReceipt"
+        style="display: none;">
+        <div id="summary-table"
+          class="col-md-10 col-12 offset-md-1 rounded p-5 bg-white shadow-lg">
+
+          <div class="row" id="receiptTable">
+            <table class="table table-hover caption-top">
+              <caption><div
+                  class="row border border-5 border-secondary-subtle border-start-0 border-top-0 border-end-0 ">
+                  <div class="col-8">
+                    <h1>JLT25 Architechtural Design Quotation</h1>
+                  </div>
+                  <div class="col">
+                    <img src="logoTemplate.jpg" width="128" height="64"
+                      alt="Company Logo" class="logo float-end">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="mb-3 col-auto">
+                    <label for="quotationId"
+                      class="form-label fw-bold">Quotation
+                      #</label>
+                    <input type="text" class="form-control-plaintext"
+                      id="quotationId"
+                      readonly>
+                  </div>
+                  <div class="mb-3 col-6">
+                  </div>
+                  <div class="mb-3 col-auto">
+                    <label for="quotationDate"
+                      class="form-label fw-bold">Date</label>
+                    <input type="text" class="form-control-plaintext"
+                      id="quotationDate" readonly>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <label for="totalFloorAreaSummary"
+                      class="form-label fw-bold">Total Floor Area:<label>
+                        <input type="text" class="form-control-plaintext"
+                          id="totalFloorAreaSummary"
+                          readonly>
+                      </div>
+                      <div class="col-12">
+                        <label for="totalAreaSqmSummary"
+                          class="form-label fw-bold">Total Area: <label>
+                            <input type="text" class="form-control-plaintext"
+                              id="totalAreaSqmSummary"
+                              readonly>
+                          </div>
+
+                        </div></caption>
+                      <thead>
+                        <tr>
+                          <th scope="col"
+                            class="bg-success text-white ">Details</th>
+                          <th scope="col" class="bg-success text-white ">#</th>
+                          <th scope="col"
+                            class="bg-success text-white text-center">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody">
+                        <tr id="floorCountSummaryRow">
+                          <td class="fw-bold">No. of Floor(s)</td>
+                          <td id="floorCountSummary">1</td>
+                          <td id="floorCountPrice" class="text-center">0</td>
+                        </tr>
+
+                        <tr id="bedroomCountSummaryRow">
+                          <td class="fw-bold">No. of Bedroom(s)</td>
+                          <td id="bedroomCountSummary">1</td>
+                          <td id="bedroomPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                        <tr id="bathroomCountSummaryRow">
+                          <td class="fw-bold">No. of Bathroom(s)</td>
+                          <td id="bathroomCountSummary">1</td>
+                          <td id="bathroomPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                        <tr id="electricitySummaryRow">
+                          <td class="fw-bold" colspan="2">Electricity</td>
+                          <td id="electricityPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                        <tr id="kitchenSummaryRow">
+                          <td class="fw-bold" colspan="2">Kitchen</td>
+                          <td id="kitchenPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                        <tr id="highEndSummaryRow">
+                          <td class="fw-bold" colspan="2">High end</td>
+                          <td id="highendPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                      </tbody>
+
+                      <tfoot
+                        class="border border-5 border-secondary-subtle border-start-0 border-bottom-0 border-end-0">
+                        <tr>
+                          <td class="fw-bold" colspan="2">Downpayment</td>
+                          <td class="text-center" id="downpaymentSummary">0</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-bold"></td>
+                          <td class="fw-bold bg-success text-white">Total</td>
+                          <td class="text-center bg-success text-white fw-bold"
+                            id="totalPriceSummary">0</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <button id="downloadPDF" class="btn btn-primary">Download
+                    PDF</button>
+                </div>
+              </div>
+
+            </div>
+
+            <footer class="footer">
+              <div class="container text-center">
+                <span>&copy; All Right Reserved 2023</span>
+              </div>
+            </footer>
+
+            <!--code end here-->
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+              integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
+              integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js"
+              integrity="sha512-oVbWSv2O4y1UzvExJMHaHcaib4wsBMS5tEP3/YkMP6GmkwRJAa79Jwsv+Y/w7w2Vb/98/Xhvck10LyJweB8Jsw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+              integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+              integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <!-- <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+              integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+              integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+            <script>
+                window.jsPDF = window.jspdf.jsPDF;
+                
+
+                $(document).ready(function(){
+                  document.getElementById('downloadPDF').addEventListener('click', function() {
+                    const table = document.getElementById('receiptTable');
+
+                    html2canvas(table).then(canvas => {
+                      const imgData = canvas.toDataURL('image/png'); // Convert canvas to base64 image data
+
+                        const pdf = new jsPDF();
+                        const imgWidth = 190; // Image width (adjustable)
+                        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                        const padding = 10; // Padding around the image
+
+                        // Calculate positioning with padding
+                        const x = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
+                        const y = padding;
+
+                        pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+                      pdf.save('JLT25_Quotation_receipt.pdf');
+                    });
+                  });
+                });
+              </script>
+
+            <!-- <script
+              src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script> -->
+            <script type="importmap">
+              {
+                  "imports": {
+                      "datatables.net": "https://cdn.datatables.net/1.13.1/js/jquery.dataTables.mjs",
+                      "jquery": "https://esm.sh/jquery@3.5.0"
+                  }
+              }
+            </script>
+            <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, addDoc, collection, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import {app, auth} from './js/index.js';
+        import DataTable from 'datatables.net';
+
+        const fetchData = async (url) => {
+          try {
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error('Network response was not ok.');
+            }
+            const data = await response.json();
+            return data;
+          } catch (error) {
+            // Handle errors
+            console.error('Error fetching data:', error);
+            throw error;
+          }
+        };
+        const db = getFirestore(app);
+        var selectedReceipt = null;
+        var dataset;
+
+        
+        auth.onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log("User is signed in:", user);
+          fetchQuotations();
+          // Perform actions for authenticated user, e.g., redirect to a protected page
+        } else {
+          // User is signed out.
+          bootbox.alert(`Please sign in first!`);
+          console.log("User is signed out");
+          // Perform actions for non-authenticated user, e.g., redirect to login page
+        }
+      });
+
+      const searchByOrderId = (orderId) => {
+        const filteredData = dataset.filter(item => item.document.fields.orderId.stringValue === orderId);
+        return filteredData;
+      };
+
+      function formatCurrency(number, currencyCode = 'PHP') {
+          return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currencyCode
+          }).format(number);
+        }
+
+      const updateFields = (data) => {
+        const fields = data[0].document.fields;
+
+        // Update specific fields with the data from searchResult
+        document.getElementById('quotationId').value = fields.orderId.stringValue;
+        document.getElementById('quotationDate').value = new Date(fields.timestamp.timestampValue).toLocaleDateString();
+        document.getElementById('totalFloorAreaSummary').value = fields.totalFloorArea.integerValue;
+        document.getElementById('totalAreaSqmSummary').value = fields.totalLotArea.integerValue;
+
+        // Update other fields
+        document.getElementById('floorCountSummary').textContent = fields.numberOfFloors.integerValue;
+        let floorPrice = '-';
+        if(fields.floorPrice.hasOwnProperty('doubleValue')){
+          floorPrice = formatCurrency(parseFloat(fields.floorPrice.doubleValue));
+        }
+        else if(fields.floorPrice.hasOwnProperty('integerValue')){
+          floorPrice = formatCurrency(parseFloat(fields.floorPrice.integerValue));
+        }
+        document.getElementById('floorCountPrice').textContent = floorPrice; // Function to calculate price
+        document.getElementById('bedroomCountSummary').textContent = fields.numberOfRooms.integerValue;
+        let bedroomFees = '-';
+        if(fields.bedroomFees.hasOwnProperty('doubleValue')){
+          bedroomFees = formatCurrency(parseFloat(fields.bedroomFees.doubleValue));
+        }
+        else if(fields.bedroomFees.hasOwnProperty('integerValue')){
+          bedroomFees = formatCurrency(parseFloat(fields.bedroomFees.integerValue));
+        }
+
+        document.getElementById('bedroomPriceSummary').textContent = bedroomFees; // Function to calculate price
+        document.getElementById('bathroomCountSummary').textContent = fields.numberOfBathrooms.integerValue;
+
+        let bathroomFees = '-';
+        if(fields.bathroomFees.hasOwnProperty('doubleValue')){
+          bathroomFees = formatCurrency(parseFloat(fields.bathroomFees.doubleValue));
+        }
+        else if(fields.bathroomFees.hasOwnProperty('integerValue')){
+          bathroomFees = formatCurrency(parseFloat(fields.bathroomFees.integerValue));
+        }
+        document.getElementById('bathroomPriceSummary').textContent = bathroomFees; // Function to calculate price
+
+        let electricityFees = '-';
+        if(fields.electricityFees.hasOwnProperty('doubleValue')){
+          electricityFees = formatCurrency(parseFloat(fields.electricityFees.doubleValue));
+        }
+        else if(fields.electricityFees.hasOwnProperty('integerValue')){
+          electricityFees = formatCurrency(parseFloat(fields.electricityFees.integerValue));
+        }
+        document.getElementById('electricityPriceSummary').textContent = electricityFees; // Function to calculate electricity price
+
+        let kitchenFees = '-';
+        if(fields.kitchenFees.hasOwnProperty('doubleValue')){
+          kitchenFees = formatCurrency(parseFloat(fields.kitchenFees.doubleValue));
+        }
+        else if(fields.kitchenFees.hasOwnProperty('integerValue')){
+          kitchenFees = formatCurrency(parseFloat(fields.kitchenFees.integerValue));
+        }
+        document.getElementById('kitchenPriceSummary').textContent = kitchenFees; // Function to calculate kitchen price
+
+        let highendFee = '-';
+        if(fields.highendFee.hasOwnProperty('doubleValue')){
+          highendFee = parseFloat(fields.highendFee.doubleValue);
+        }
+        else if(fields.highendFee.hasOwnProperty('integerValue')){
+          highendFee = parseFloat(fields.highendFee.integerValue);
+        }
+        
+        if(highendFee == '-' || highendFee == 0){
+          $(`#highEndSummaryRow`).hide();
+        }
+        else{
+          $(`#highEndSummaryRow`).show();
+        }
+
+        document.getElementById('highendPriceSummary').textContent = formatCurrency(highendFee); // Function to calculate high end price
+
+        let downpayment = '-';
+        if(fields.downpayment.hasOwnProperty('doubleValue')){
+          downpayment = formatCurrency(parseFloat(fields.downpayment.doubleValue));
+        }
+        else if(fields.downpayment.hasOwnProperty('integerValue')){
+          downpayment = formatCurrency(parseFloat(fields.downpayment.integerValue));
+        }
+        document.getElementById('downpaymentSummary').textContent = downpayment; // Function to calculate downpayment
+        let totalPrice = '-';
+        if(fields.totalPrice.hasOwnProperty('doubleValue')){
+          totalPrice = formatCurrency(parseFloat(fields.totalPrice.doubleValue));
+        }
+        else if(fields.totalPrice.hasOwnProperty('integerValue')){
+          totalPrice = formatCurrency(parseFloat(fields.totalPrice.integerValue));
+        }
+        document.getElementById('totalPriceSummary').textContent = totalPrice; // Function to calculate total price
+      };
+
+        function fetchQuotations(){
+
+          var requestData =
+          {
+            structuredQuery: {
+                from: [{
+                    collectionId: "quotations",
+                    allDescendants: false
+                }],
+
+                where: {
+                    fieldFilter: {
+                        field: {
+                            fieldPath: "email"
+                        },
+                        op: "EQUAL",
+                        value: {
+                            stringValue: `${auth.currentUser.email}`
+                        }
+                    }
+                }
+            }
+          };
+
+          let dialog = bootbox.dialog({
+            message: '<p class="text-center mb-0"><i class="fas fa-spin fa-cog"></i> Fetching data...</p>',
+          closeButton: false
+          })
+          .on('shown.bs.modal', async function(){
+
+            await fetch(`https://firestore.googleapis.com/v1/projects/jt25-fae27/databases/(default)/documents:runQuery`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                // Add any other headers if required
+              },
+              body: JSON.stringify(requestData), // Convert the JavaScript object to JSON string
+            })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok.');
+                }
+                return response.json();
+              })
+              .then(jsonData => {
+                // Handle the response data
+                dialog.modal('hide');
+                console.log(jsonData);
+                dataset = jsonData;
+                const dataTableArray = jsonData.map(item => [
+                  item.document.fields.orderId.stringValue,
+                  new Date(item.document.fields.timestamp.timestampValue).toLocaleString()
+                ]);
+
+                console.log(dataTableArray);
+
+                new DataTable('#quotationTable', {                  
+                    data: dataTableArray,
+                    columns: [
+                        { title: 'orderId' },
+                        { title: 'timestamp' },
+                        { 
+                          title: 'Action',
+                          render: function(data, type, row) {
+                            return '<button class="toggleButton btn btn-primary" data-rowid="' + row[0] + '">Show Details</button>';
+                          }
+                        }
+                    ]
+                });
+
+                $('#quotationTable tbody').on('click', '.toggleButton', function() {
+                  selectedReceipt = $(this).data('rowid');
+                  console.log(`selectedId = ${selectedReceipt}`);
+                  const searchResult = searchByOrderId(selectedReceipt);
+                  console.log(searchResult);
+                  updateFields(searchResult);
+                  $('#summmaryReceipt').show();
+                });
+              })
+              .catch(error => {
+                // Handle errors
+                console.error('Error:', error);
+                dialog.modal('hide');
+                bootbox.alert(error);
+              });
+
+            dialog.modal('hide');
+
+          });
+          
+          
+
+          
+
+          
+        }
+    </script>
+            <script>
+      
+  $(function(){    
+    $.get("navbar.html", function(data) {
+      $("body").prepend(data); // Append content.html data into the #container div
+    });
+
+    
+    
+  });
+</script>
+
+          </body>
+        </html>
