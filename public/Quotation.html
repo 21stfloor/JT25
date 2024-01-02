@@ -149,150 +149,172 @@ input:valid {
 
       </form>
 
-      <div class="row summary bg-primary-subtle p-1" id="summmaryReceipt" style="display: none;">
+      <div class="row summary bg-primary-subtle p-1" id="summmaryReceipt"
+        style="display: none;">
         <div id="summary-table"
           class="col-md-10 col-12 offset-md-1 rounded p-5 bg-white shadow-lg">
-          
-          <div class="row" id="receiptTable">
+
+          <div class="row p-3" id="receiptTable">
             <table class="table table-hover caption-top">
-              <caption><div class="row border border-5 border-secondary-subtle border-start-0 border-top-0 border-end-0 ">
-                <div class="col-8">
-                  <h1>JLT25 Architechtural Design Quotation</h1>
+              <caption><div
+                  class="row border border-5 border-secondary-subtle border-start-0 border-top-0 border-end-0 ">
+                  <div class="col-8">
+                    <h1>JLT25 Architechtural Design Quotation</h1>
+                  </div>
+                  <div class="col">
+                    <img src="logoTemplate.jpg" width="128" height="64"
+                      alt="Company Logo" class="logo float-end">
+                  </div>
                 </div>
-                <div class="col">
-                  <img src="logoTemplate.jpg" width="128" height="64"
-                    alt="Company Logo" class="logo float-end">
+                <div class="row mt-3">
+                  <div class="mb-3 col-auto">
+                    <label for="quotationId"
+                      class="form-label fw-bold">Quotation
+                      #</label>
+                    <input type="text" class="form-control-plaintext"
+                      id="quotationId"
+                      readonly>
+                  </div>
+                  <div class="mb-3 col-6">
+                  </div>
+                  <div class="mb-3 col-auto">
+                    <label for="quotationDate"
+                      class="form-label fw-bold">Date</label>
+                    <input type="text" class="form-control-plaintext"
+                      id="quotationDate" readonly>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <label for="totalFloorAreaSummary"
+                      class="form-label fw-bold">Total Floor Area:<label>
+                        <input type="text" class="form-control-plaintext"
+                          id="totalFloorAreaSummary"
+                          readonly>
+                      </div>
+                      <div class="col-12">
+                        <label for="totalAreaSqmSummary"
+                          class="form-label fw-bold">Total Area: <label>
+                            <input type="text" class="form-control-plaintext"
+                              id="totalAreaSqmSummary"
+                              readonly>
+                          </div>
+
+                        </div></caption>
+                      <thead>
+                        <tr>
+                          <th scope="col"
+                            class="bg-success text-white ">Details</th>
+                          <th scope="col" class="bg-success text-white ">#</th>
+                          <th scope="col"
+                            class="bg-success text-white text-center">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody">
+                        <tr id="floorCountSummaryRow">
+                          <td class="fw-bold">No. of Floor(s)</td>
+                          <td id="floorCountSummary">1</td>
+                          <td id="floorCountPrice" class="text-center">0</td>
+                        </tr>
+
+                        <tr id="bedroomCountSummaryRow">
+                          <td class="fw-bold">No. of Bedroom(s)</td>
+                          <td id="bedroomCountSummary">1</td>
+                          <td id="bedroomPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                        <tr id="bathroomCountSummaryRow">
+                          <td class="fw-bold">No. of Bathroom(s)</td>
+                          <td id="bathroomCountSummary">1</td>
+                          <td id="bathroomPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                        <tr id="electricitySummaryRow">
+                          <td class="fw-bold" colspan="2">Electricity</td>
+                          <td id="electricityPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                        <tr id="kitchenSummaryRow">
+                          <td class="fw-bold" colspan="2">Kitchen</td>
+                          <td id="kitchenPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                        <tr id="highEndSummaryRow">
+                          <td class="fw-bold" colspan="2">High end</td>
+                          <td id="highendPriceSummary"
+                            class="text-center">0</td>
+                        </tr>
+
+                      </tbody>
+
+                      <tfoot
+                        class="border border-5 border-secondary-subtle border-start-0 border-bottom-0 border-end-0">
+                        <tr>
+                          <td class="fw-bold" colspan="2">Downpayment</td>
+                          <td class="text-center" id="downpaymentSummary">0</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-bold"></td>
+                          <td class="fw-bold bg-success text-white">Total</td>
+                          <td class="text-center bg-success text-white fw-bold"
+                            id="totalPriceSummary">0</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <button id="downloadPDF" class="btn btn-primary">Download
+                    PDF</button>
                 </div>
               </div>
-              <div class="row mt-3">
-                <div class="mb-3 col-auto">
-                  <label for="quotationId" class="form-label fw-bold">Quotation
-                    #</label>
-                  <input type="text" class="form-control-plaintext" id="quotationId"
-                    readonly>
-                </div>
-                <div class="mb-3 col-6">
-                </div>
-                <div class="mb-3 col-auto">
-                  <label for="quotationDate" class="form-label fw-bold">Date</label>
-                  <input type="text" class="form-control-plaintext"
-                    id="quotationDate" readonly>
-                </div>
+            </div>
+
+            <footer class="footer">
+              <div class="container text-center">
+                <span>&copy; All Right Reserved 2023</span>
               </div>
-              <div class="row">
-                <div class="col-12">
-                  <label for="totalFloorAreaSummary" class="form-label fw-bold">Total Floor Area:<label>
-                  <input type="text" class="form-control-plaintext" id="totalFloorAreaSummary"
-                    readonly>
-                </div>
-                <div class="col-12">
-                  <label for="totalAreaSqmSummary" class="form-label fw-bold">Total Area: <label>
-                  <input type="text" class="form-control-plaintext" id="totalAreaSqmSummary"
-                    readonly>
-                </div>
-    
-              </div></caption>
-              <thead>
-                <tr>
-                  <th scope="col" class="bg-success text-white ">Details</th>
-                  <th scope="col" class="bg-success text-white ">#</th>
-                  <th scope="col" class="bg-success text-white text-center">Total</th>
-                </tr>
-              </thead>
-              <tbody id="tbody">
-                <tr id="floorCountSummaryRow">
-                  <td class="fw-bold">No. of Floor(s)</td>
-                  <td id="floorCountSummary">1</td>
-                  <td id="floorCountPrice" class="text-center">0</td>
-                </tr>
+            </footer>
 
-                <tr id="bedroomCountSummaryRow">
-                  <td class="fw-bold">No. of Bedroom(s)</td>
-                  <td id="bedroomCountSummary">1</td>
-                  <td id="bedroomPriceSummary" class="text-center">0</td>
-                </tr>
+            <!--code end here-->
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+              integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
+              integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js"
+              integrity="sha512-oVbWSv2O4y1UzvExJMHaHcaib4wsBMS5tEP3/YkMP6GmkwRJAa79Jwsv+Y/w7w2Vb/98/Xhvck10LyJweB8Jsw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script type="text/javascript"
+              src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+              integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-                <tr id="bathroomCountSummaryRow">
-                  <td class="fw-bold">No. of Bathroom(s)</td>
-                  <td id="bathroomCountSummary">1</td>
-                  <td id="bathroomPriceSummary" class="text-center">0</td>
-                </tr>
-
-                <tr id="electricitySummaryRow">
-                  <td class="fw-bold" colspan="2">Electricity</td>                  
-                  <td id="electricityPriceSummary" class="text-center">0</td>
-                </tr>
-
-                <tr id="kitchenSummaryRow">
-                  <td class="fw-bold" colspan="2">Kitchen</td>                  
-                  <td id="kitchenPriceSummary" class="text-center">0</td>
-                </tr>
-
-                <tr id="highEndSummaryRow">
-                  <td class="fw-bold" colspan="2">High end</td>                  
-                  <td id="highendPriceSummary" class="text-center">0</td>
-                </tr>
-
-              </tbody>
-
-              <tfoot class="border border-5 border-secondary-subtle border-start-0 border-bottom-0 border-end-0">
-                <tr>
-                  <td class="fw-bold" colspan="2">Downpayment</td>   
-                  <td class="text-center" id="downpaymentSummary">0</td>
-                </tr>
-                <tr>
-                  <td class="fw-bold"></td>   
-                  <td class="fw-bold bg-success text-white">Total</td>                  
-                  <td class="text-center bg-success text-white fw-bold" id="totalPriceSummary">0</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-
-        </div>
-      <div class="row">
-        <button id="downloadPDF" class="btn btn-primary">Download PDF</button>
-      </div>
-      </div>
-    </div>
-
-    <footer class="footer">
-      <div class="container text-center">
-        <span>&copy; All Right Reserved 2023</span>
-      </div>
-    </footer>
-
-    <!--code end here-->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
-      integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js"
-      integrity="sha512-oVbWSv2O4y1UzvExJMHaHcaib4wsBMS5tEP3/YkMP6GmkwRJAa79Jwsv+Y/w7w2Vb/98/Xhvck10LyJweB8Jsw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
-      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script
-      src="https://www.paypal.com/sdk/js?client-id=ATeqISSROuuS7bK3tVPiIcdhxAy3WZclv5tvPXCVinjR0hSgh95NYjC5Zrn5aMlRVgF3OkRxmZTx43Mw&components=buttons&currency=PHP"></script>
-    <script type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script> -->
-      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script> -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <!-- <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script> -->
-    <script>
+            <script
+              src="https://www.paypal.com/sdk/js?client-id=ATeqISSROuuS7bK3tVPiIcdhxAy3WZclv5tvPXCVinjR0hSgh95NYjC5Zrn5aMlRVgF3OkRxmZTx43Mw&components=buttons&currency=PHP"></script>
+            <script type="text/javascript"
+              src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+              integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+              integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script>
+              
       window.jsPDF = window.jspdf.jsPDF;
       $(document).ready(function(){
         document.getElementById('downloadPDF').addEventListener('click', function() {
@@ -317,13 +339,15 @@ input:valid {
         });
       });
     </script>
-    <!-- <script type="module" src="js/index.js"></script> -->
-    <script type="module">
+            <!-- <script type="module" src="js/index.js"></script> -->
+            <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, addDoc, collection, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
         import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
         import {app, auth} from './js/index.js';
+        import moment from 'https://cdn.skypack.dev/moment-es6';
 
         const fetchData = async (url) => {
           try {
@@ -344,6 +368,9 @@ input:valid {
       
         
         const db = getFirestore(app);
+        const storage = getStorage();
+
+
         // const auth = getAuth(app);
         auth.onAuthStateChanged(function(user) {
         if (user) {
@@ -482,8 +509,13 @@ input:valid {
 
                 $('#paypal-button-container').hide();
 
+                let captureUrl = `https://jlt25-1b1f25d12d7f.herokuapp.com/paypal/capture/${orderData.orderID}`;
+                if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                  captureUrl = `http://127.0.0.1:8000/paypal/capture/${orderData.orderID}`;
+                }
+
                 $.ajax({
-                  url: `https://jlt25-1b1f25d12d7f.herokuapp.com/paypal/capture/${orderData.orderID}`,
+                  url: captureUrl,
                   type: 'POST',
                   dataType: 'json',
                   contentType: 'application/json',
@@ -522,75 +554,146 @@ input:valid {
                       timestamp: serverTimestamp()
                     };
 
-                    try{
-                      // Add a new document with a generated id.
-                      const createdDocument = await addDoc(collection(db, "quotations"), propertyData);
-                      console.log(createdDocument);
+                    // Add a new document with a generated id.
+                    const createdDocument = await addDoc(collection(db, "quotations"), propertyData);
+                    console.log(createdDocument);
 
-                      quotationId = orderData.orderID;
-                      quotationDate = new Date();
+                    quotationId = orderData.orderID;
+                    quotationDate = new Date();
 
-                      $(`#quotationId`).val(quotationId);
-                      $(`#quotationDate`).val(quotationDate);
+                    $(`#quotationId`).val(quotationId);
+                    $(`#quotationDate`).val(quotationDate);
 
-                      if (user == null) {
-                        var password = generateRandomPassword();
-                        createUserWithEmailAndPassword(auth, email, password)
-                        .then((userCredential) => {
-                          // Signed up 
-                          const user = userCredential.user;
-                          const subject = "JLT Default Account Password";
-                          const message = `Welcome to JLT Architecture Design, <br> This is your default account password : ${password}, you can use it to login to your account using this email: ${email}`;
-                          let emailUrl = "https://jlt25-1b1f25d12d7f.herokuapp.com/send-email";
-                          if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-                              emailUrl = "http://127.0.0.1:8000/send-email";
-                          }
-                          // Send data via AJAX to Laravel endpoint
-                          $.ajax({
-                              url: emailUrl,
-                              method: 'POST',
-                              data: {
-                                  email: email,
-                                  subject: subject,
-                                  message: message
-                              },
-                              success: function(response) {
-                                  console.log(response);
-                                  $('.summary').show();
-                                  bootbox.alert('Please check you email for your default account password');                                  
-                                  // $('.save-quote').removeAttr('disabled');
-                              },
-                              error: function(xhr, status, error) {
-                                  console.error(error);
-                                  bootbox.alert('Failed to send email.');
-                                  // $('.save-quote').removeAttr('disabled');
+                    let emailUrl = "https://jlt25-1b1f25d12d7f.herokuapp.com/send-email";
+                    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                        emailUrl = "http://127.0.0.1:8000/send-email";
+                    }
+
+                    console.log(`emailUrl: ${emailUrl}`);
+
+                    $('.summary').show();
+
+
+                    html2canvas(document.querySelector("#receiptTable")).then(canvas => {
+                      
+                      const imgData = canvas.toDataURL(); // Convert canvas to base64 image data
+                      console.log(imgData);
+                      let base64Content = imgData;
+                      // Find the position of the comma to get the start of the base64 content
+                      let commaIndex = imgData.indexOf(',');
+                      if (commaIndex !== -1) {
+                          // Extract the base64 content after the comma
+                          base64Content = imgData.slice(commaIndex + 1);
+
+                          // Use the extracted base64 content
+                          console.log(base64Content); // Output the base64 content without the prefix
+                      }
+
+                      dialog.modal('hide');
+
+                      dialog = bootbox.dialog({
+                                message: '<p class="text-center mb-0"><i class="fas fa-spin fa-cog"></i> Sending email...</p>',
+                                closeButton: false
+                                });
+                      // Create a reference to 'images/mountains.jpg'
+                        const receiptImageRef = ref(storage, `receipts/${getCurrentDate()}/${quotationId}.jpg`);
+
+                        uploadString(receiptImageRef, base64Content, 'base64').then((snapshot) => {
+                          console.log(snapshot);
+                          getDownloadURL(ref(storage, receiptImageRef))
+                          .then((imgUrl) => {
+                            
+                          try{
+                            if (user == null) {
+                                var password = generateRandomPassword();
+                                createUserWithEmailAndPassword(auth, email, password)
+                                .then((userCredential) => {
+                                  // Signed up 
+                                  const user = userCredential.user;
+                                  const subject = "JLT Default Account Password";
+                                  const message = `Welcome to JLT Architecture Design, <br> This is your default account password : ${password}, you can use it to login to your account using this email: ${email}`;
+                                  
+                                  // Send data via AJAX to Laravel endpoint
+                                  $.ajax({
+                                      url: emailUrl,
+                                      method: 'POST',
+                                      data: {
+                                          email: email,
+                                          subject: subject,
+                                          message: message,
+                                          image: imgUrl
+                                      },
+                                      success: function(response) {
+                                          console.log(response);
+                                          bootbox.alert('Please check you email for your default account password');   
+                                          
+                                          // $('.save-quote').removeAttr('disabled');
+                                      },
+                                      error: function(xhr, status, error) {
+                                          console.error(error);
+                                          dialog.modal('hide');
+                                          bootbox.alert('Failed to send email.');
+                                          
+                                          // $('.save-quote').removeAttr('disabled');
+                                      }
+                                  });
+                                  // ...
+                                })
+                                .catch((error) => {
+                                  const errorCode = error.code;
+                                  const errorMessage = error.message;
+                                  // ..
+                                  console.log(errorMessage);
+                                  if(errorMessage == "Firebase: Error (auth/email-already-in-use)."){
+                                    bootbox.alert(`A new quotation was save using the account with the email: ${email}`);
+                                  }
+                                });
                               }
+
+                              $.ajax({
+                                  url: emailUrl,
+                                  method: 'POST',
+                                  data: {
+                                      email: `jltarchitechturaldesignservice@gmail.com`,
+                                      subject: `New quotation`,
+                                      message: `A new quotation has been submitted.<br> email: ${email}<br> Quotation ID: ${quotationId}`,
+                                      image: imgUrl
+                                  },
+                                  success: function(response) {
+                                      console.log(response);
+                                      dialog.modal('hide');
+                                      bootbox.alert('Please check you email for your receipt');                                  
+                                      // $('.save-quote').removeAttr('disabled');
+                                  },
+                                  error: function(xhr, status, error) {
+                                      console.error(error);
+                                      bootbox.alert('Failed to send email.');
+                                      dialog.modal('hide');
+                                      // $('.save-quote').removeAttr('disabled');
+                                  }
+                              });
+
+                            }
+                            catch(error){
+                              console.log(error);
+                              dialog.modal('hide');
+                              bootbox.alert(error);
+                            }
+                          })
+                          .catch((error) => {
+                            // Handle any errors
+                            bootbox.alert(error);
+                            dialog.modal('hide');
                           });
-                          // ...
-                        })
-                        .catch((error) => {
-                          const errorCode = error.code;
-                          const errorMessage = error.message;
-                          // ..
-                          console.log(errorMessage);
-                          if(errorMessage == "Firebase: Error (auth/email-already-in-use)."){
-                            bootbox.alert(`A new quotation was save using the account with the email: ${email}`);
-                          }
-                          $('.summary').show();
+                          
                         });
-                      }
-                      else{
-                        $('.summary').show();
-                      }
 
-                      }
-                      catch(error){
-                        console.log(error);
-                        bootbox.alert(error);
-                        $('.summary').show();
-                      }
+                     
+                    });
 
-                    dialog.modal('hide');
+                   
+
+                    
                     // Handle the response data here
                   },
                   error: function(xhr, status, error) {
@@ -800,8 +903,14 @@ input:valid {
           return n + suffix;
         }
         
+        function getCurrentDate(){
+          // Create a new Date object (automatically set to the current date and time)
+          let currentDate = moment(); // This creates a moment object representing the current date and time
+
+          return currentDate.format('YYYY-MM-DD');
+        }
     </script>
-    <script>
+            <script>
       
   $(function(){    
     $.get("navbar.html", function(data) {
@@ -813,5 +922,5 @@ input:valid {
   });
 </script>
 
-  </body>
-</html>
+          </body>
+        </html>

@@ -30,21 +30,23 @@
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="form-group">
-                                <label for="loginEmailMobile">Email address</label>
+                                <label for="loginEmailMobile">Email
+                                    address</label>
                                 <input type="email" class="form-control"
                                     id="loginEmailMobile"
                                     placeholder="Enter email"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="loginPasswordMobile">Password</label>
+                                <label
+                                    for="loginPasswordMobile">Password</label>
                                 <input type="password" class="form-control"
                                     id="loginPasswordMobile"
                                     placeholder="Password"
                                     required>
                             </div>
 
-                            <button type="submit" class="btn btn-primary"
+                            <button type="button" class="btn btn-primary"
                                 id="loginMobile">Login</button>
                         </div>
                     </form>
@@ -73,25 +75,28 @@
                                 onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                 maxlength="11" required />
                             <div class="form-group">
-                                <label for="registerEmailMobile">Email address</label>
+                                <label for="registerEmailMobile">Email
+                                    address</label>
                                 <input type="email" class="form-control"
                                     id="registerEmailMobile"
                                     placeholder="Enter email" required>
                             </div>
                             <div class="form-group">
-                                <label for="registerPasswordMobile">Password</label>
+                                <label
+                                    for="registerPasswordMobile">Password</label>
                                 <input type="password" class="form-control"
                                     id="registerPasswordMobile"
                                     placeholder="Password" required>
                             </div>
                             <div class="form-group">
-                                <label for="registerConfirmPasswordMobile">Confirm
+                                <label
+                                    for="registerConfirmPasswordMobile">Confirm
                                     Password</label>
                                 <input type="password" class="form-control"
                                     id="registerConfirmPasswordMobile"
                                     placeholder="Password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary"
+                            <button type="button" class="btn btn-primary"
                                 id="registerMobile">Register</button>
                         </div>
                     </form>
@@ -115,7 +120,7 @@
             </div>
 
             <div class="white-panel">
-                <form method="post" >
+                <form method="post" id="registrationMobileForm">
                     <div class="login-show">
                         <h2>LOGIN</h2>
                         <input type="text" placeholder="Email" id="email"
@@ -123,13 +128,8 @@
                         <input type="password" placeholder="Password"
                             id="password" required>
                         <!-- <a href="#" id="forgot-password">Forgot Password?</a> -->
-                        <button id="login" class="btn btn-secondary align-right">Login</button>
-                        <!-- <div id="forgot-password-modal" style="display: none;">
-                <h2>Reset Password</h2>
-                <input type="text" placeholder="Email">
-                <button id="resetPassword" class="btn btn-secondary align-right">Send Reset Link</button>
-                <a href="#" id="close-modal">Close</a>
-            </div>  -->
+                        <button id="login" type="button"
+                            class="btn btn-secondary align-right">Login</button>
                     </div>
 
                     <div class="register-show">
@@ -144,15 +144,16 @@
                             placeholder="Phone Number"
                             onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                             maxlength="11" required />
-                        <input type="text" id="registerEmail" name="email" value=""
+                        <input type="text" id="registerEmail" name="email" value
                             placeholder="Email" required>
-                        <input type="password" id="registerPassword" name="password"
+                        <input type="password" id="registerPassword"
+                            name="password"
                             placeholder="Password" required>
                         <input type="password" id="confirmPassword"
                             placeholder="Confirm Password" required>
-                            
-                        <button id="register"
-                            class="btn btn-secondary align-right" >Register</button>
+
+                        <button id="register" type="button"
+                            class="btn btn-secondary align-right">Register</button>
                     </div>
                 </form>
             </div>
@@ -166,8 +167,10 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
             integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+        <script
+            src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+        <script
+            src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
         <script
             src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
         <script
@@ -175,8 +178,8 @@
             integrity="sha512-oVbWSv2O4y1UzvExJMHaHcaib4wsBMS5tEP3/YkMP6GmkwRJAa79Jwsv+Y/w7w2Vb/98/Xhvck10LyJweB8Jsw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        
-        <script type="text/javascript" src="js/form.js"></script>
+
+        <script type="module" src="js/form.js"></script>
 
         <script type="module">
             import {app, auth} from './js/index.js';

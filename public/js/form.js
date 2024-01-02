@@ -1,3 +1,5 @@
+import {app, auth, db} from './index.js'; 
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
 // Select the form elements
@@ -14,24 +16,58 @@ var registerEmail = document.getElementById('registerEmail');
 var registerPassword = document.getElementById('registerPassword');
 var registerConfirmPassword = document.getElementById('confirmPassword');
 
-// Create an event listener for the login button
-document.getElementById('login').addEventListener('click', function (event) {
-    // Prevent the default form submission
-    event.preventDefault();
-    // Get the values of the input fields
-    var email = loginEmail.value;
-    var password = loginPassword.value;
-    tryLogin(email, password);
+
+
+$(document).ready(function(){
+
+    // Create an event listener for the login button
+    document.getElementById('login').addEventListener('click', function (event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        // Get the values of the input fields
+        var email = loginEmail.value;
+        var password = loginPassword.value;
+        tryLogin(email, password);
+    });
+
+    document.getElementById('loginMobile').addEventListener('click', function (event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        // Get the values of the input fields
+        var email = loginEmailMobile.value;
+        var password = loginPasswordMobile.value;
+        tryLogin(email, password);
+    });
+
+    document.getElementById('registerMobile').addEventListener('click', function (event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        var fullName = $('#fullNameMobile').val();
+        var birthday = $('#birthdayMobile').val();
+        var address = $('#addressMobile').val();
+        var phoneNumber = $('#phoneNumberMobile').val();
+        var email = $('#registerEmailMobile').val();
+        var password = $('#registerPasswordMobile').val();
+        var confirmPassword = $('#registerConfirmPasswordMobile').val();
+        tryRegister(fullName, birthday, address, phoneNumber, email, password, confirmPassword);
+    });
+    
+    // Create an event listener for the register button
+    document.getElementById('register').addEventListener('click', function (event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        var fullName = registerFullName.value;
+        var birthday = registerBirthday.value;
+        var address = registerAddress.value;
+        var phoneNumber = registerPhoneNumber.value;
+        var email = registerEmail.value;
+        var password = registerPassword.value;
+        var confirmPassword = registerConfirmPassword.value;
+        tryRegister(fullName, birthday, address, phoneNumber, email, password, confirmPassword);
+    });
 });
 
-document.getElementById('loginMobile').addEventListener('click', function (event) {
-    // Prevent the default form submission
-    event.preventDefault();
-    // Get the values of the input fields
-    var email = loginEmailMobile.value;
-    var password = loginPasswordMobile.value;
-    tryLogin(email, password);
-});
+
 
 function tryLogin(email, password) {
     
@@ -41,10 +77,10 @@ function tryLogin(email, password) {
         return false;
     }
 
-    auth.signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in
-            var user = userCredential.user;
+            // Signed in 
+            const user = userCredential.user;
             console.log(user);
             // alert("Login Successful");
             window.location.href = "index.html";
@@ -63,35 +99,12 @@ function tryLogin(email, password) {
                 alert("Invalid Email or Password");
             }
         });
+
+    
 }
 
 
-document.getElementById('registerMobile').addEventListener('click', function (event) {
-    // Prevent the default form submission
-    event.preventDefault();
-    var fullName = $('#fullNameMobile').val();
-    var birthday = $('#birthdayMobile').val();
-    var address = $('#addressMobile').val();
-    var phoneNumber = $('#phoneNumberMobile').val();
-    var email = $('#registerEmailMobile').val();
-    var password = $('#registerPasswordMobile').val();
-    var confirmPassword = $('#registerConfirmPasswordMobile').val();
-    tryRegister(fullName, birthday, address, phoneNumber, email, password, confirmPassword);
-});
 
-// Create an event listener for the register button
-document.getElementById('register').addEventListener('click', function (event) {
-    // Prevent the default form submission
-    event.preventDefault();
-    var fullName = registerFullName.value;
-    var birthday = registerBirthday.value;
-    var address = registerAddress.value;
-    var phoneNumber = registerPhoneNumber.value;
-    var email = registerEmail.value;
-    var password = registerPassword.value;
-    var confirmPassword = registerConfirmPassword.value;
-    tryRegister(fullName, birthday, address, phoneNumber, email, password, confirmPassword);
-});
 
 function tryRegister(fullName, birthday, address, phoneNumber, email, password, confirmPassword) {
     // Get the values of the input fields
@@ -112,7 +125,7 @@ function tryRegister(fullName, birthday, address, phoneNumber, email, password, 
         return false;
     }
 
-    auth.createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
             var user = userCredential.user;
@@ -151,4 +164,5 @@ function tryRegister(fullName, birthday, address, phoneNumber, email, password, 
                 bootbox.alert(errorMessage);
             }
         });
+        
 }
