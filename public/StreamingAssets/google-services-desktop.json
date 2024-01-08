@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "590615766263",
+    "project_id": "jt25-fae27",
+    "storage_bucket": "jt25-fae27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590615766263:android:9d56dd235014a99f3a1ff2",
+        "android_client_info": {
+          "package_name": "com.thesis.jlt25"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590615766263-nt0fq86l99556mjnrumjoio4uhdvld75.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thesis.jlt25",
+            "certificate_hash": "60eb2cbee387da986d73d3badfe93ad03a5530c7"
+          }
+        },
+        {
+          "client_id": "590615766263-hlakb2e13epf70edrdhicag6krsvqgc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ7hKPyyams9XplPAOZurz56FrlTYbEaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590615766263-hlakb2e13epf70edrdhicag6krsvqgc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
