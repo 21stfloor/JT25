@@ -452,7 +452,8 @@ input:valid {
                 dataset = jsonData;
                 const dataTableArray = jsonData.map(item => [
                   item.document.fields.orderId.stringValue,
-                  new Date(item.document.fields.timestamp.timestampValue).toLocaleString()
+                  new Date(item.document.fields.timestamp.timestampValue).toLocaleString(),
+                  item.document.fields
                 ]);
 
                 console.log(dataTableArray);
@@ -464,8 +465,10 @@ input:valid {
                         { title: 'timestamp' },
                         { 
                           title: 'Action',
-                          render: function(data, type, row) {
-                            return '<button class="toggleButton btn btn-primary" data-rowid="' + row[0] + '">Show Details</button> ';
+                          render: function(data, type, row, meta) {
+                            let rowData = row[2];
+                            let linkParameters = `orderId=${rowData.orderId.stringValue}&floors=${rowData.numberOfFloors.integerValue}`;
+                            return `<button class="toggleButton btn btn-primary" data-rowid="' + row[0] + '">Show Details</button> <a href="designer.html?${linkParameters}" type="button" target="_blank" class="btn btn-success">Design <i class="bi bi-box-arrow-in-up-right"></i></a>`;
                           }
                         }
                     ]

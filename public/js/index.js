@@ -39,15 +39,11 @@ auth.onAuthStateChanged(
         if (currentUser) {
             signIn.style.display = 'none';
             signOutLink.style.display = 'block';
-            $('#designerLink').show();
     
             let path = window.location.pathname;
             if (path.endsWith('loginSignUp.html')) {
                 window.location.replace('index.html'); // Change to your login/sign-up page URL
             }
-        }
-        else{
-            $('#designerLink').hide();
         }
     }
 );

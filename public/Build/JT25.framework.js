@@ -1993,13 +1993,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  4522208: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
- 4522269: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
- 4522333: function() {return Module.webglContextAttributes.powerPreference;},  
- 4522391: function() {Module['emscripten_get_now_backup'] = performance.now;},  
- 4522446: function($0) {performance.now = function() { return $0; };},  
- 4522494: function($0) {performance.now = function() { return $0; };},  
- 4522542: function() {performance.now = Module['emscripten_get_now_backup'];}
+  4522384: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
+ 4522445: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
+ 4522509: function() {return Module.webglContextAttributes.powerPreference;},  
+ 4522567: function() {Module['emscripten_get_now_backup'] = performance.now;},  
+ 4522622: function($0) {performance.now = function() { return $0; };},  
+ 4522670: function($0) {performance.now = function() { return $0; };},  
+ 4522718: function() {performance.now = Module['emscripten_get_now_backup'];}
 };
 
 
@@ -2146,6 +2146,64 @@ var ASM_CONSTS = {
       if (Module['extraStackTrace']) js += '\n' + Module['extraStackTrace']();
       return demangleAll(js);
     }
+
+  function _ConvertBase64ToUploadedUrl(base64) {
+  	var base64Image = UTF8ToString(base64);
+      console.log(`base64Image : ${base64Image}`);
+  	
+  	var existingScriptTag = document.getElementById('myScriptTag');
+  	
+  	if(existingScriptTag){
+  		existingScriptTag.remove();
+  	}
+  	
+  	
+  	const scriptString = `
+  	  import {app, auth} from './js/index.js';
+  	  import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+  	  import moment from 'https://cdn.skypack.dev/moment-es6';
+  	  import { gameInstance } from './js/game.js';
+  	  
+  	  const storage = getStorage();
+  	  console.log('LOOOOOOL');
+  	  
+  	  const currentDate = moment().format('YYYY-MM-DD');
+  	  
+  	  auth.onAuthStateChanged(function (user) {
+  		if (user == null) {
+  			window.location.replace('index.html');
+  		}
+  		else {
+  			const currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+  			  const urlParams = new URLSearchParams(window.location.search);
+  
+  			  const orderId = urlParams.get('orderId');
+  				  
+  			  const designImageRef = ref(storage, 'designs/'+currentDate+'/'+orderId+'/'+currentDateTime+'.jpg');
+  			  
+  			  uploadString(designImageRef, "${base64Image}", 'base64').then((snapshot) => {
+  								  console.log(snapshot);
+  								  getDownloadURL(ref(storage, designImageRef))
+  								  .then((imgUrl) => {
+  									  gameInstance.SendMessage('ScreenshotSender', 'ReceiveImageUrl', imgUrl +'|'+ auth.email +'|'+ orderId);
+  									  
+  								  });
+  		});
+  	}
+  	  
+  	  
+  	  });
+  	`;
+  
+  	// Creating a script element
+  	const script = document.createElement('script');
+  	script.type = 'module';
+  	script.text = scriptString;
+  	script.id = 'myScriptTag'; // Adding an id
+  
+  	// Appending the script to the body
+  	document.body.appendChild(script);
+  }
 
   function _GetJSMemoryInfo(totalJSptr, usedJSptr) {
       if (performance.memory) {
@@ -15234,6 +15292,7 @@ function checkIncomingModuleAPI() {
   ignoredModuleProp('fetchSettings');
 }
 var asmLibraryArg = {
+  "ConvertBase64ToUploadedUrl": _ConvertBase64ToUploadedUrl,
   "GetJSMemoryInfo": _GetJSMemoryInfo,
   "JS_Accelerometer_IsRunning": _JS_Accelerometer_IsRunning,
   "JS_Accelerometer_Start": _JS_Accelerometer_Start,
